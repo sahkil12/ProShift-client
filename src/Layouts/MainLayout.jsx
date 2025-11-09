@@ -1,0 +1,19 @@
+import { Outlet } from 'react-router';
+import Navbar from '../Components/Shared/Navbar/Navbar';
+import Footer from '../Components/Shared/Footer/Footer';
+
+const MainLayout = () => {
+    return (
+        <div className='max-w-[95%] mx-auto'>
+            <header className='sticky top-0 z-50'>
+                <Navbar></Navbar>
+            </header>
+            <main className='min-h-[calc(100vh-584px)]'>
+                <Outlet></Outlet>
+            </main>
+            <Footer></Footer>
+        </div>
+    );
+};
+
+export default MainLayout;
