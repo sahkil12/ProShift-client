@@ -12,13 +12,13 @@ const Footer = () => {
         <li><NavLink> Be a Rider </NavLink></li>
     </>
     return (
-        <footer className="footer rounded-3xl footer-horizontal footer-center bg-neutral text-primary-content p-12">
+        <footer className="footer rounded-t-4xl  footer-horizontal footer-center bg-neutral text-primary-content p-12">
             <aside>
                 <Link to={'/'} className="flex justify-center my-5 items-end">
                     <img src="/public/assets/logo.png" className="h-12 w-fit" alt="" />
-                    <h2 className="text-[32px] text-white -ml-1 mt-1 font-extrabold">ProShift</h2>
+                    <h2 className="text-2xl md:text-[32px] text-white -ml-1 mt-1 font-extrabold">ProShift</h2>
                 </Link>
-                <p className="font-normal mb-5 text-base/relaxed text-center w-4/6">
+                <p className="font-normal mb-5 text-base/relaxed text-center w-11/12 md:w-4/5">
                     Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.
                 </p>
                 <div className="border-b border-dashed border-teal-900 w-full"></div>

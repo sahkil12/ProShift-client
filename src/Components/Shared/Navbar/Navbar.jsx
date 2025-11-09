@@ -10,7 +10,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar bg-base-200 shadow-lg py-4 px-2 md:px-4 rounded-2xl">
+        <div className="navbar bg-base-200 shadow-md py-4 px-2 md:px-4 rounded-2xl">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -22,9 +22,9 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                 </div>
-                <Link to={'/'} className="flex items-center">
-                    <img src="/public/assets/logo.png" className="h-12 w-fit" alt="" />
-                    <h2 className="text-[32px] -ml-1 mt-5 font-extrabold">ProShift</h2>
+                <Link to={'/'} className="flex items-center mx-2 lg:mx-1">
+                    <img src="/public/assets/logo.png" className="h-9 md:h-12 w-fit" alt="" />
+                    <h2 className="text-2xl md:text-[32px] -ml-1 mt-5 font-extrabold">ProShift</h2>
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
