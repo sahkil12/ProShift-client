@@ -22,10 +22,10 @@ const CustomerReviews = () => {
             {/* Heading */}
             <div className="text-center mb-14">
                 <img src={headingImg} alt="Reviews" className="mx-auto mb-8 w-56" />
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-teal-900">
                     What our customers are saying
                 </h2>
-                <p className="text-gray-500 font-medium max-w-xl px-3 mx-auto mt-4">
+                <p className="text-gray-600 font-medium max-w-xl px-3 mx-auto mt-4">
                     Enhance posture, mobility, and well-being effortlessly with ProShift.
                     Achieve proper alignment, reduce pain, and strengthen your body with ease!
                 </p>
@@ -34,7 +34,7 @@ const CustomerReviews = () => {
             <div className="max-w-7xl mx-auto relative">
                 <Swiper
                     modules={[Navigation, Pagination]}
-                    slidesPerView={1.2}
+                    slidesPerView={1}
                     centeredSlides
                     spaceBetween={40}
                     navigation={{

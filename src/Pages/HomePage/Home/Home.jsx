@@ -2,13 +2,14 @@ import Banner from "./Banner/Banner";
 import Benefits from "./Benefits/Benefits";
 import Brands from "./Brands/Brands";
 import CustomerReviews from "./CustomerReviews/CustomerReviews";
+import FAQS from "./FAQS/FAQS";
 import HowItWork from "./HowItWork/HowItWork";
 import Merchant from "./Marchant/Merchant";
 import OurServices from "./OurServices/OurServices";
 
 const Home = () => {
     return (
-        <div className="pb-8 space-y-10 md:space-y-20">
+        <div className="pb-16 space-y-10 md:space-y-20">
             <Banner></Banner>
             <HowItWork></HowItWork>
             <OurServices></OurServices>
@@ -16,6 +17,7 @@ const Home = () => {
             <Benefits></Benefits>
             <Merchant></Merchant>
             <CustomerReviews></CustomerReviews>
+            <FAQS></FAQS>
         </div>
     );
 };
