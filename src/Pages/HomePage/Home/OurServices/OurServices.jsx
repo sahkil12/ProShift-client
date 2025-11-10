@@ -53,7 +53,7 @@ const OurServices = () => {
                     {servicesData.map((service, index) => (
                         <div
                             key={index}
-                            className="card flex gap-6 flex-col items-center px-8 py-12 shadow-lg bg-white rounded-3xl transform transition-transform duration-400 hover:-translate-y-2 hover:shadow-xl hover:bg-[#caeb66d7] "
+                            className="card flex gap-6 flex-col items-center px-8 py-12 shadow-lg bg-white rounded-3xl transform transition-transform duration-400 hover:-translate-y-2.5 hover:shadow-xl hover:bg-[#caeb66d7] "
                         >
                             <span className="p-6 bg-gradient-to-b from-gray-200 to-gray-100 rounded-full">{service.icon}</span>
                             <h3 className="text-[22px] font-bold mb-2">{service.title}</h3>
