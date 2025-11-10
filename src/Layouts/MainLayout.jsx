@@ -4,7 +4,7 @@ import Footer from '../Components/Shared/Footer/Footer';
 
 const MainLayout = () => {
     return (
-        <div className='max-w-[95%] mx-auto'>
+        <div className='w-full md:max-w-[95%] lg:max-w-[92%] mx-auto'>
             <header className='sticky top-0 z-50'>
                 <Navbar></Navbar>
             </header>

@@ -26,10 +26,10 @@ const HowItWork = () => {
     ];
 
     return (
-        <section className="py-16">
+        <section className="py-6 md:py-10">
             <div className="w-full md:w-10/12 mx-auto px-4">
                 <h2 className="text-4xl font-extrabold mb-12">How It Works</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-7">
                     {howItWorksData.map((card, index) => (
                         <div key={index} className=" card px-6 py-12 shadow-lg bg-white rounded-2xl hover:shadow-xl transform  duration-300 transition-transform hover:-translate-y-2">
                             <div className="mb-5">
