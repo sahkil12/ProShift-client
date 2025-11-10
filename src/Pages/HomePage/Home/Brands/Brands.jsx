@@ -7,7 +7,6 @@ import randstad from "../../../../../public/assets/brands/randstad.png";
 import startPeople from "../../../../../public/assets/brands/start-people 1.png";
 import start from "../../../../../public/assets/brands/start.png";
 
-
 const brandImages = [amazon, casio, moonstar, randstad, startPeople, start];
 
 const Brands = () => {

@@ -2,6 +2,7 @@ import Banner from "./Banner/Banner";
 import Benefits from "./Benefits/Benefits";
 import Brands from "./Brands/Brands";
 import HowItWork from "./HowItWork/HowItWork";
+import Merchant from "./Marchant/Merchant";
 import OurServices from "./OurServices/OurServices";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
             <OurServices></OurServices>
             <Brands></Brands>
             <Benefits></Benefits>
+            <Merchant></Merchant>
         </div>
     );
 };
