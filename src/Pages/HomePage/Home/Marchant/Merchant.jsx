@@ -2,7 +2,7 @@ import merchentImg from '../../../../../public/assets/Others/location-merchant.p
 
 const Merchant = () => {
     return (
-        <div className="hero p-6 sm:p-12 lg:p-20 bg-[#03373D] border w-11/12 mx-auto rounded-3xl">
+        <div className="bg-no-repeat bg-[url('/assets/Others/be-a-merchant-bg.png')] p-6 sm:p-12 lg:p-20 bg-[#03373D] border w-11/12 mx-auto rounded-3xl">
             <div className="hero-content flex-col xl:flex-row-reverse gap-8">
                 <img
                     src={merchentImg}

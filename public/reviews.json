@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "text": "Their delivery service is fast and dependable. I rely on them for both business shipments and personal parcels.",
+    "userImg": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    "name": "Abdul Karim",
+    "role": "E-Commerce Store Owner"
+  },
+  {
+    "id": 2,
+    "text": "Real-time parcel tracking gives me confidence during every delivery. Very smooth process.",
+    "userImg": "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80",
+    "name": "Nadia Akter",
+    "role": "Senior Product Designer"
+  },
+  {
+    "id": 3,
+    "text": "Their customer support is respectful and quick to respond. It feels reliable.",
+    "userImg": "https://img.freepik.com/free-photo/young-bearded-man-with-denim-shirt_273609-7230.jpg?semt=ais_hybrid&w=740&q=80",
+    "name": "Rafi Ahmed",
+    "role": "Customer Relationship Manager"
+  },
+  {
+    "id": 4,
+    "text": "Packages are handled with care and delivered on time consistently. That’s all I need.",
+    "userImg": "https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ=",
+    "name": "Sabrina Islam",
+    "role": "Business Consultant"
+  },
+  {
+    "id": 5,
+    "text": "Their cash-on-delivery service made my online store operations easier and smoother.",
+    "userImg": "https://static.vecteezy.com/system/resources/thumbnails/007/687/985/small/headshot-of-beautiful-woman-with-friendly-smile-has-healthy-skin-being-in-good-mood-after-unforgettable-rest-in-resort-country-with-boyfriend-has-appealing-look-people-beauty-lifestyle-concept-free-photo.jpg",
+    "name": "Tom hela",
+    "role": "Online Shop Owner"
+  },
+  {
+    "id": 6,
+    "text": "Nationwide delivery coverage is impressive. I can serve customers anywhere.",
+    "userImg": "https://htmlstream.com/preview/unify-v2.6/assets/img-temp/400x450/img5.jpg",
+    "name": "Mahmud Hasan",
+    "role": "Logistics Manager"
+  },
+  {
+    "id": 7,
+    "text": "Return handling is efficient and organized. Helps maintain customer trust.",
+    "userImg": "https://plus.unsplash.com/premium_photo-1688350839154-1a131bccd78a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d29tZW4lMjBwcm9maWxlJTIwcGljdHVyZXxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    "name": "Jannatul Ferdous",
+    "role": "Brand Manager"
+  }
+]

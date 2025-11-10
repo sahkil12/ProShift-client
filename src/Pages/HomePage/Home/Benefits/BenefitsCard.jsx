@@ -2,7 +2,7 @@
 const BenefitsCard = ({ item }) => {
     return (
         <div
-            className="flex flex-col md:flex-row items-center gap-8 p-7 bg-white rounded-2xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow duration-300"
+            className="flex flex-col md:flex-row items-center gap-8 p-7 bg-white rounded-2xl shadow-sm border border-neutral-200 hover:shadow-md transition-shadow duration-300"
         >
             {/* Left Image */}
             <img

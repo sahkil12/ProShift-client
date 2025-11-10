@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 @import "tailwindcss";
 @plugin "daisyui";
 
 body {
     font-family: "Urbanist", sans-serif;
+}
+
+@layer components {
+
+    .swiper-pagination-bullet {
+        @apply w-2.5 h-2.5 rounded-full bg-gray-400 opacity-60 transition-all duration-300 mx-1;
+    }
+
+    .swiper-pagination-bullet-active {
+        @apply w-3.5 h-3.5 bg-[#00dd9e] opacity-100 shadow-md shadow-[#00B884]/40 scale-150;
+    }
 }

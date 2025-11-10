@@ -12,7 +12,7 @@ const Footer = () => {
         <li><NavLink> Be a Rider </NavLink></li>
     </>
     return (
-        <footer className="footer rounded-t-4xl  footer-horizontal footer-center bg-neutral text-primary-content p-12">
+        <footer className="footer rounded-t-4xl footer-horizontal footer-center bg-neutral text-primary-content p-12">
             <aside>
                 <Link to={'/'} className="flex  my-5 items-end">
                     <img src="/assets/Others/logo.png" className="h-12 w-fit mb-2" alt="" />
@@ -21,11 +21,11 @@ const Footer = () => {
                 <p className="font-normal mb-5 text-base/relaxed text-center w-11/12 md:w-4/5">
                     Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.
                 </p>
-                <div className="border-b border-dashed border-teal-900 w-full"></div>
+                <div className="border border-dashed border-teal-900 w-full"></div>
                 <ul className="flex flex-col md:flex-row font-normal gap-6 items-center my-6">
                     {navItems}
                 </ul>
-                <div className="border-b border-dashed border-teal-900 w-full"></div>
+                <div className="border border-dashed border-teal-900 w-full"></div>
             </aside>
             <nav>
                 <div className="grid grid-flow-col gap-8">
