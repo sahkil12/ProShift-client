@@ -12,9 +12,9 @@ const brandImages = [brand1, brand2, brand3, brand4, brand5, brand6];
 
 const Brands = () => {
     return (
-        <section className="py-12">
+        <section className="py-10">
             <div className="w-full md:w-11/12 mx-auto px-4 text-center">
-                <h2 className="text-3xl lg:text-4xl text-teal-950 font-extrabold mb-14 md:mb-20">We've helped thousands of sales teams</h2>
+                <h2 className="text-3xl lg:text-4xl text-teal-950 font-extrabold mb-14 md:mb-20">We've helped <span className="md:border-b-3 md:pb-2">thousands</span> of sales teams</h2>
 
                 <Marquee speed={45} pauseOnHover={true} >
                     <div className="flex items-center justify-between gap-6 md:gap-20 w-full ">
