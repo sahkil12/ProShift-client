@@ -1,14 +1,14 @@
 import Marquee from "react-fast-marquee";
 
-import brand1 from "../../../../../public/assets/brands/amazon.png";
-import brand2 from "../../../../../public/assets/brands/casio.png";
-import brand3 from "../../../../../public/assets/brands/moonstar.png";
-import brand4 from "../../../../../public/assets/brands/randstad.png";
-import brand5 from "../../../../../public/assets/brands/start-people 1.png";
-import brand6 from "../../../../../public/assets/brands/start.png";
+import amazon from "../../../../../public/assets/brands/amazon.png";
+import casio from "../../../../../public/assets/brands/casio.png";
+import moonstar from "../../../../../public/assets/brands/moonstar.png";
+import randstad from "../../../../../public/assets/brands/randstad.png";
+import startPeople from "../../../../../public/assets/brands/start-people 1.png";
+import start from "../../../../../public/assets/brands/start.png";
 
 
-const brandImages = [brand1, brand2, brand3, brand4, brand5, brand6];
+const brandImages = [amazon, casio, moonstar, randstad, startPeople, start];
 
 const Brands = () => {
     return (
