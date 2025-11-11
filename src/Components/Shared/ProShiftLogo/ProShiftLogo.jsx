@@ -4,7 +4,7 @@ const ProShiftLogo = () => {
     return (
         <Link to={'/'} className="flex items-center">
             <img src="/assets/Others/logo.png" className="h-9 md:h-12 w-fit" alt="" />
-            <h2 className="text-2xl md:text-[32px] -ml-1 mt-5 font-extrabold">ProShift</h2>
+            <h2 className="text-[25px] md:text-[32px] -ml-1 mt-5 font-extrabold">ProShift</h2>
         </Link>
     );
 };
