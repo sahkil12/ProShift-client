@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
 import useAuth from "../../../Context/Hooks/useAuth";
+import SocialLogin from "../SocialAccount/SocialLogin";
 
 const Register = () => {
-    const { createUser, googleCreate } = useAuth()
+    const { createUser } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const onSubmit = (data) => {
@@ -19,8 +19,6 @@ const Register = () => {
                 console.log(error);
             })
     }
-
-
     return (
         <div>
             <div className="w-full max-w-xl mx-auto p-8 space-y-3 rounded-xl bg-gray-50text-gray-800 my-7">
@@ -75,12 +73,7 @@ const Register = () => {
                 </div>
                 <div className="flex justify-center space-x-4">
                     {/* Google */}
-                    <button onClick={() => {
-                        googleCreate()
-                    }} className="flex rounded-md justify-center items-center gap-2 w-full text-base font-bold bg-gray-200 py-1.5 border text-black border-[#e5e5e5]">
-                        <span className="p-2.5 rounded-full bg-white"> <FcGoogle size={22}></FcGoogle></span>
-                        Register with Google
-                    </button>
+                    <SocialLogin methodName={"Register"}></SocialLogin>
                 </div>
             </div>
         </div>
