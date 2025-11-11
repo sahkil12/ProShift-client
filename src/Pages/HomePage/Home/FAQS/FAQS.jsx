@@ -47,9 +47,9 @@ const FAQS = () => {
             {/* faq collapse*/}
             <div className="lg:w-10/12 mx-auto p-6">
                 {
-                    faqsData.slice(0, initialNumber).map((faq, index) => <div key={index} className="collapse collapse-arrow bg-white border border-gray-200 my-2 overflow-hidden">
+                    faqsData.slice(0, initialNumber).map((faq, index) => <div key={index} className="collapse collapse-arrow bg-white border border-gray-200 my-2">
                         <input type="radio" name="faq-accordion" className="peer" defaultChecked={index === 0} />
-                        <div className="px-6 collapse-title bg-white text-teal-800 peer-checked:text-teal-900 peer-checked:bg-[#40e0e01a] font-bold md:text-lg ">{faq.question}</div>
+                        <div className="px-6 py-6 collapse-title bg-white text-teal-950 peer-checked:text-teal-800 peer-checked:bg-[#40e0e01a] font-bold md:text-lg ">{faq.question}</div>
                         <div className="px-6 collapse-content peer-checked:border-t text-sm font-medium md:text-base text-gray-600 peer-checked:bg-[#40e0e01a] peer-checked:pt-4 border-neutral-200">{faq.answer}</div>
                     </div>)
                 }
@@ -58,8 +58,8 @@ const FAQS = () => {
             {
                 initialNumber <= 5 ?
                     <div onClick={() => { setInitialNumber(faqsData.length) }} className="w-fit mx-auto mt-6 flex items-center">
-                        <button className="py-3 px-7 font-bold text-lg rounded-xl bg-[#CAEB66]">See More FAQ's</button>
-                        <span className="p-2 text-3xl rounded-full bg-black/90 text-[#CAEB66]"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
+                        <button className="py-3 px-7 font-bold text-lg rounded-xl bg-primary">See More FAQ's</button>
+                        <span className="p-2 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
                     </div>
                     :
                     <div onClick={() => { setInitialNumber(5) }} className="w-fit mx-auto mt-6 flex items-center">

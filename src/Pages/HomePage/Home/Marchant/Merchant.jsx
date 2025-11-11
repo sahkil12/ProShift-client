@@ -14,8 +14,8 @@ const Merchant = () => {
                         We offer the lowest delivery charge with the highest value along with 100% safety of your product. Pathao courier delivers your parcels in every corner of Bangladesh right on time.
                     </p>
                     <div className='flex flex-col lg:flex-row gap-6 pt-6'>
-                        <button className="font-bold text-lg bg-[#CAEB66] px-7 py-3 text-black rounded-full ">Become a Merchant</button>
-                        <button className="font-bold text-lg border-2 border-[#CAEB66] px-7 py-3 text-[#CAEB66] rounded-full ">Earn with Profast Courier</button>
+                        <button className="font-bold text-lg bg-primary px-7 py-3 text-black rounded-full ">Become a Merchant</button>
+                        <button className="font-bold text-lg border-2 border-primary px-7 py-3 text-primary rounded-full ">Earn with ProShift Courier</button>
                     </div>
                 </div>
             </div>

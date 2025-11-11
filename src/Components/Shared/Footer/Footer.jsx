@@ -21,7 +21,7 @@ const Footer = () => {
                     Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.
                 </p>
                 <div className="border border-dashed border-teal-900 w-full"></div>
-                <ul className="flex flex-col md:flex-row font-normal gap-7 items-center my-6">
+                <ul className="links flex flex-col md:flex-row font-normal gap-7 items-center my-6">
                     {navItems}
                 </ul>
                 <div className="border border-dashed border-teal-900 w-full"></div>

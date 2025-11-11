@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import ProShiftLogo from "../../Components/Shared/ProShiftLogo/ProShiftLogo";
-
+import { motion } from "motion/react"
 import authImg from '../../../public/assets/Others/authImage.png'
 
 const AuthLayout = () => {
@@ -10,7 +10,9 @@ const AuthLayout = () => {
                 <div className="hero">
                     <div className=" flex justify-center items-center w-full flex-col-reverse lg:flex-row-reverse">
                         <div className="bg-[#FAFDF0] w-full flex-1 h-screen flex justify-center items-center">
-                            <img
+                            <motion.img
+                                animate={{y:[25, 80, 25]}}
+                                transition={{duration:6, repeat: Infinity}}
                                 src={authImg}
                                 className="bg-transparent"
                             />
@@ -19,8 +21,8 @@ const AuthLayout = () => {
                             <div className="w-11/12 py-5 mx-auto">
                                 <ProShiftLogo></ProShiftLogo>
                             </div>
-                           
-                                <Outlet></Outlet>
+
+                            <Outlet></Outlet>
                         </div>
                     </div>
                 </div>
