@@ -1,20 +1,27 @@
+import { Outlet } from "react-router";
+import ProShiftLogo from "../../Components/Shared/ProShiftLogo/ProShiftLogo";
+
+import authImg from '../../../public/assets/Others/authImage.png'
 
 const AuthLayout = () => {
     return (
-        <div className="border min-h-screen">
-             <div className="hero bg-base-200 min-h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-                        className="max-w-sm rounded-lg shadow-2xl"
-                    />
-                    <div>
-                        <h1 className="text-5xl font-bold">Box Office News!</h1>
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
-                        <button className="btn btn-primary">Get Started</button>
+        <div className="">
+            <div>
+                <div className="hero">
+                    <div className=" flex justify-center items-center w-full flex-col-reverse lg:flex-row-reverse">
+                        <div className="bg-[#FAFDF0] w-full flex-1 h-screen flex justify-center items-center">
+                            <img
+                                src={authImg}
+                                className="bg-transparent"
+                            />
+                        </div>
+                        <div className="flex-1 h-screen w-full bg-white">
+                            <div className="w-11/12 py-5 mx-auto">
+                                <ProShiftLogo></ProShiftLogo>
+                            </div>
+                           
+                                <Outlet></Outlet>
+                        </div>
                     </div>
                 </div>
             </div>
