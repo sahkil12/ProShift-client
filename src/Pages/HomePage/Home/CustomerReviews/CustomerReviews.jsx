@@ -32,31 +32,33 @@ const CustomerReviews = () => {
             </div>
             {/* Carousel */}
             <div className="max-w-7xl mx-auto relative">
-                <Swiper
-                    modules={[Navigation, Pagination]}
-                    slidesPerView={1}
-                    centeredSlides
-                    spaceBetween={40}
-                    navigation={{
-                        nextEl: ".custom-next",
-                        prevEl: ".custom-prev"
-                    }}
-                    pagination={{ clickable: true, el: ".custom-pagination" }}
-                    loop
-                    breakpoints={{
-                        768: { slidesPerView: 1.5 },
-                        1024: { slidesPerView: 2.6 }
-                    }}
-                    className="pb-4"
-                >
-                    {reviews.map((review) => (
-                        <SwiperSlide className="" key={review.id}>
-                            {({ isActive }) => (
-                                <ReviewCard review={review} isActive={isActive} />
-                            )}
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                {
+                    reviews.length > 0 && <Swiper
+                        modules={[Navigation, Pagination]}
+                        slidesPerView={1}
+                        centeredSlides
+                        spaceBetween={40}
+                        navigation={{
+                            nextEl: ".custom-next",
+                            prevEl: ".custom-prev"
+                        }}
+                        pagination={{ clickable: true, el: ".custom-pagination" }}
+                        loop
+                        breakpoints={{
+                            768: { slidesPerView: 1.5 },
+                            1024: { slidesPerView: 2.6 }
+                        }}
+                        className="pb-4"
+                    >
+                        {reviews.map((review) => (
+                            <SwiperSlide className="" key={review.id}>
+                                {({ isActive }) => (
+                                    <ReviewCard review={review} isActive={isActive} />
+                                )}
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                }
             </div>
             {/* Custom Arrows + Pagination */}
             <div className="flex justify-center items-center max-w-72 mx-auto">

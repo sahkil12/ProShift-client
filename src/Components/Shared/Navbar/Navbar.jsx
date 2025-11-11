@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router";
+import ProShiftLogo from "../ProShiftLogo/ProShiftLogo";
 
 const Navbar = () => {
     const navItems = <>
@@ -22,13 +23,11 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                 </div>
-                <Link to={'/'} className="flex items-center mx-2 lg:mx-1">
-                    <img src="/assets/Others/logo.png" className="h-9 md:h-12 w-fit" alt="" />
-                    <h2 className="text-2xl md:text-[32px] -ml-1 mt-5 font-extrabold">ProShift</h2>
-                </Link>
+                {/* logo */}
+                <ProShiftLogo></ProShiftLogo>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 gap-5">
                     {navItems}
                 </ul>
             </div>

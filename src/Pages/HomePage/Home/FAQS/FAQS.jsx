@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoArrowForward } from "react-icons/io5";
 
 const FAQS = () => {
-    const [intialNumber, setInitialNumber] = useState(5)
+    const [initialNumber, setInitialNumber] = useState(5)
     const faqsData = [
         {
             question: "How can I schedule a pick-up?",
@@ -39,26 +39,35 @@ const FAQS = () => {
     ];
 
     return (
-        <div className="py-10 md:w-11/12 mx-auto">
+        <div className="py-6 md:w-11/12 mx-auto">
             <div className="space-y-5 text-center mb-8">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-teal-900 ">Frequently Asked Question (FAQ)</h2>
                 <p className="font-medium opacity-90 px-2 text-gray-600 sm:w-4/6 lg:w-3/6 mx-auto">Enhance posture, mobility, and well-being effortlessly with Posture Pro. Achieve proper alignment, reduce pain, and strengthen your body with ease!</p>
             </div>
-            {/* faq */}
+            {/* faq collapse*/}
             <div className="lg:w-10/12 mx-auto p-6">
                 {
-                    faqsData.slice(0, intialNumber).map((faq, index) => <div key={index} className="collapse collapse-arrow bg-white hover:bg-gray-100 border border-teal-700 my-2 ">
-                        <input type="radio" name="my-accordion-2" className="peer" defaultChecked={index === 0} />
-                        <div className="px-6 collapse-title text-teal-800 peer-checked:text-teal-900 peer-checked:bg-[#40e0e01a] font-bold md:text-lg ">{faq.question}</div>
-                        <div className="px-6 collapse-content peer-checked:border-t text-sm font-medium md:text-base peer-checked:text-gray-600 peer-checked:bg-[#40e0e01a] peer-checked:pt-4 border-neutral-200 ">{faq.answer}</div>
+                    faqsData.slice(0, initialNumber).map((faq, index) => <div key={index} className="collapse collapse-arrow bg-white border border-gray-200 my-2 overflow-hidden">
+                        <input type="radio" name="faq-accordion" className="peer" defaultChecked={index === 0} />
+                        <div className="px-6 collapse-title bg-white text-teal-800 peer-checked:text-teal-900 peer-checked:bg-[#40e0e01a] font-bold md:text-lg ">{faq.question}</div>
+                        <div className="px-6 collapse-content peer-checked:border-t text-sm font-medium md:text-base text-gray-600 peer-checked:bg-[#40e0e01a] peer-checked:pt-4 border-neutral-200">{faq.answer}</div>
                     </div>)
                 }
             </div>
+            {/* button see more and see less */}
+            {
+                initialNumber <= 5 ?
+                    <div onClick={() => { setInitialNumber(faqsData.length) }} className="w-fit mx-auto mt-6 flex items-center">
+                        <button className="py-3 px-7 font-bold text-lg rounded-xl bg-[#CAEB66]">See More FAQ's</button>
+                        <span className="p-2 text-3xl rounded-full bg-black/90 text-[#CAEB66]"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
+                    </div>
+                    :
+                    <div onClick={() => { setInitialNumber(5) }} className="w-fit mx-auto mt-6 flex items-center">
+                        <button className="py-3 px-7 font-bold text-lg rounded-xl bg-[#CAEB66]">See Less FAQ's</button>
+                        <span className="p-2 text-3xl rounded-full bg-black/90 text-[#CAEB66]"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
+                    </div>
+            }
 
-            <div onClick={() => { setInitialNumber(faqsData.length) }} className="w-fit mx-auto mt-6 flex items-center">
-                <button className="py-3 px-7 font-bold text-lg rounded-xl bg-[#CAEB66]">See More FAQ's</button>
-                <span className="p-3 text-3xl rounded-full bg-black/90 text-[#CAEB66]"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
-            </div>
         </div>
     );
 };

@@ -2,6 +2,7 @@ import { FaFacebookF } from "react-icons/fa6";
 import { RiLinkedinFill, RiTwitterXLine } from "react-icons/ri";
 import { FaYoutube } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
+import ProShiftLogo from "../ProShiftLogo/ProShiftLogo";
 
 const Footer = () => {
     const navItems = <>
@@ -14,15 +15,13 @@ const Footer = () => {
     return (
         <footer className="footer rounded-t-4xl footer-horizontal footer-center bg-neutral text-primary-content p-12">
             <aside>
-                <Link to={'/'} className="flex  my-5 items-end">
-                    <img src="/assets/Others/logo.png" className="h-12 w-fit mb-2" alt="" />
-                    <h2 className="text-2xl md:text-[32px] text-white -ml-1 mt-1 font-extrabold">ProShift</h2>
-                </Link>
-                <p className="font-normal mb-5 text-base/relaxed text-center w-11/12 md:w-4/5">
+                {/* logo */}
+                <ProShiftLogo></ProShiftLogo>
+                <p className="font-normal my-5 text-base/relaxed text-center w-11/12 md:w-4/5">
                     Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.
                 </p>
                 <div className="border border-dashed border-teal-900 w-full"></div>
-                <ul className="flex flex-col md:flex-row font-normal gap-6 items-center my-6">
+                <ul className="flex flex-col md:flex-row font-normal gap-7 items-center my-6">
                     {navItems}
                 </ul>
                 <div className="border border-dashed border-teal-900 w-full"></div>
