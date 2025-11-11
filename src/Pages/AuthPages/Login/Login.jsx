@@ -1,20 +1,31 @@
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
+import useAuth from "../../../Context/Hooks/useAuth";
 
 const Login = () => {
+    const { loginUser, googleCreate } = useAuth()
 
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const onSubmit = (data) => {
-        console.log(data);
+        const email = data.email;
+        const password = data.password;
+        // login user
+        loginUser(email, password)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
         <div>
             <div className="w-full max-w-xl mx-auto p-8 space-y-3 rounded-xl bg-gray-50text-gray-800 my-8">
                 <div className="pb-6 space-y-4">
-                    <h1 className="text-5xl font-extrabold">Welcome Back</h1>
+                    <h1 className="text-4xl md:text-5xl font-extrabold">Welcome Back</h1>
                     <p className="font-medium text-lg">Login With ProShift</p>
                 </div>
                 {/* form */}
@@ -45,7 +56,7 @@ const Login = () => {
                     </div>
                     <button className="block text-lg w-full p-3 text-center rounded-md text-black font-bold bg-primary">Login</button>
                 </form>
-                <span className="font-medium text-lg">Don't have an account? <Link to={'/register'}><b className="text-emerald-800">Register</b></Link> </span>
+                <span className="font-medium text-lg text-gray-500">Don't have an account? <Link to={'/register'}><b className="text-emerald-800 hover:underline">Register</b></Link> </span>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
                     <p className="px-3 text-sm text-gray-600"> Or Login with </p>
@@ -53,8 +64,10 @@ const Login = () => {
                 </div>
                 <div className="flex justify-center space-x-4">
                     {/* Google */}
-                    <button className="flex justify-center items-center gap-2 w-full text-base font-bold bg-gray-200 py-1.5 border text-black border-[#e5e5e5]">
-                      <span className="p-2 rounded-full bg-white"> <FcGoogle size={22}></FcGoogle></span>
+                    <button
+                        onClick={() => { googleCreate() }}
+                        className="flex rounded-md justify-center items-center gap-2 w-full text-base font-bold bg-gray-200 py-1.5 border text-black border-[#e5e5e5]">
+                        <span className="p-2.5 rounded-full bg-white"> <FcGoogle size={22}></FcGoogle></span>
                         Login with Google
                     </button>
                 </div>
