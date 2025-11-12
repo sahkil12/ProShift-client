@@ -4,13 +4,18 @@
 @plugin "daisyui";
 
 @plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  --color-primary: #CAEB66;
+    name: "light";
+    default: true;
+    --color-primary: #CAEB66;
 }
 
 body {
     font-family: "Urbanist", sans-serif;
+}
+
+.links li a .active {
+    border-bottom: 4px solid rgb(2, 73, 73);
+    font-weight: 800;
 }
 
 @layer components {
