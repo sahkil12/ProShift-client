@@ -16,7 +16,8 @@ const Navbar = () => {
         {user ? <li><NavLink> Track Order </NavLink></li> : ''}
         <li><NavLink> About Us </NavLink></li>
         <li><NavLink> Pricing </NavLink></li>
-        {user ? '' : <li><NavLink> Be a Rider </NavLink></li>}
+        {user ? <li className="md:hidden flex"><NavLink> Be a Rider </NavLink></li>
+         : <li className=""><NavLink> Be a Rider </NavLink></li>}
     </>
     // gsap style 
     const logoRef = useRef()
