@@ -2,17 +2,44 @@ import { Link, NavLink } from "react-router";
 import ProShiftLogo from "../ProShiftLogo/ProShiftLogo";
 import { IoArrowForward } from "react-icons/io5";
 import useAuth from "../../../Context/Hooks/useAuth";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import gsap from "gsap";
 
 const Navbar = () => {
     const { user, logOutUser } = useAuth()
-    const activeClasses = 'py-3 px-5 text-gray-700 rounded-full font-bold bg-primary'
+    const activeClasses = 'py-3 px-5 text-gray-700 transition duration-500 rounded-full font-bold bg-primary'
     const navItems = <>
         <li><NavLink> Services</NavLink></li>
-        <li><NavLink className={({ isActive }) => isActive ? `${activeClasses}` : ''} to={'/coverage'}> Coverage </NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'/coverage'}> Coverage </NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'/sendParcel'}> Send Parcel </NavLink></li>
+        {user ? <li><NavLink> Track Order </NavLink></li> : ''}
         <li><NavLink> About Us </NavLink></li>
         <li><NavLink> Pricing </NavLink></li>
-        <li><NavLink> Be a Rider </NavLink></li>
+        {user ? '' : <li><NavLink> Be a Rider </NavLink></li>}
     </>
+    // gsap style 
+    const logoRef = useRef()
+    const navRef = useRef()
+    const navEndRef = useRef()
+
+    useGSAP(() => {
+        gsap.from(logoRef.current, {
+            y: -40,
+            duration: 1.3,
+            opacity: 0
+        })
+        gsap.from(navRef.current, {
+            y: -40,
+            duration: 1.3,
+            opacity: 0,
+        })
+        gsap.from(navEndRef.current, {
+            y: -40,
+            duration: 1.3,
+            opacity: 0,
+        })
+    }, [])
 
     return (
         <div className="navbar bg-base-200 shadow-md py-4 px-2 md:px-6 rounded-b-2xl">
@@ -28,20 +55,24 @@ const Navbar = () => {
                     </ul>
                 </div>
                 {/* logo */}
-                <ProShiftLogo></ProShiftLogo>
+                <div ref={logoRef}>
+                    <ProShiftLogo></ProShiftLogo>
+                </div>
             </div>
             <div className="navbar-center hidden xl:flex">
-                <ul className="flex gap-8 font-medium text-gray-800">
+                <ul ref={navRef} className="flex gap-8 font-medium text-gray-800">
                     {navItems}
                 </ul>
             </div>
-            <div className="navbar-end">
+            <div ref={navEndRef} className="navbar-end">
                 <div className="flex items-center gap-4">
                     {/* bea a rider button */}
-                    <div className="hidden md:flex w-fit mx-auto items-center">
-                        <button className="py-2.5 px-7 font-bold text-lg rounded-xl bg-primary">Be a rider</button>
-                        <span className="p-1.5 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
-                    </div>
+                    {
+                        user && <div className="hidden md:flex w-fit mx-auto items-center">
+                            <button className="py-2.5 px-7 font-bold text-lg rounded-xl bg-primary">Be a rider</button>
+                            <span className="p-1.5 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
+                        </div>
+                    }
                     {
                         user ? <details className="dropdown dropdown-end">
                             <summary className="border-2 p-0.5 rounded-full border-gray-400 cursor-pointer list-none hover:scale-105">
@@ -60,9 +91,15 @@ const Navbar = () => {
                                 </button>
                             </ul>
                         </details> :
-                            <Link className="border-2 mx-3 px-7 text-lg rounded-xl font-semibold text-gray-700 py-2 border-gray-300 hover:border-gray-400 transition duration-200 hover:-translate-y-0.5" to={'/login'}>Login</Link>
+                            <div className="flex items-center">
+                                <Link className="border-2 mx-3 px-7 text-lg rounded-xl font-semibold text-gray-700 py-2 border-gray-300 hover:border-gray-400 transition duration-200 hover:-translate-y-0.5" to={'/login'}>Login</Link>
+                                {/* register */}
+                                <Link to={'/register'} className="hidden md:flex w-fit mx-auto items-center transition duration-200 hover:-translate-y-0.5 ">
+                                    <button className="cursor-pointer py-2.5 px-7 font-bold text-lg rounded-xl bg-primary">Register</button>
+                                    <span className="p-1.5 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
+                                </Link>
+                            </div>
                     }
-
                 </div>
             </div>
         </div>
