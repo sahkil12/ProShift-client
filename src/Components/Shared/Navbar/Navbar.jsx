@@ -48,7 +48,7 @@ const Navbar = () => {
                                 <img src={user?.photoURL} className="w-9 h-9 md:w-10 md:h-10 rounded-full object-cover" alt="" />
                             </summary>
 
-                            <ul className="dropdown-content menu bg-blue-50 rounded-box z-50 w-64 md:w-72 p-5 h-72 shadow-md border-2 border-gray-300 flex justify-start items-center flex-col gap-5">
+                            <ul className="dropdown-content menu bg-blue-50 rounded-box z-50 w-64 md:w-72 p-5 h-72 shadow-md border-2 border-gray-300 flex justify-start items-center flex-col gap-5 mt-2">
                                 <img src={user?.photoURL} className="rounded-full w-16 h-16 mb-3" alt="" />
                                 <h3 className="font-bold text-base text-teal-800 text-center">{user.displayName}</h3>
                                 <p className="font-medium">{user.email}</p>

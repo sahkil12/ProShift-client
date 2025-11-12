@@ -5,7 +5,7 @@ import AuthLayout from "../Layouts/AuthLayout/AuthLayout";
 import Login from "../Pages/AuthPages/Login/Login";
 import Register from "../Pages/AuthPages/Register/Register";
 import Coverage from "../Pages/Coverage/Coverage";
-
+import Loader from "../Components/Shared/Loader/Loader"
 
 export const router = createBrowserRouter([
     {
@@ -18,7 +18,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/coverage',
-                element: <Coverage></Coverage>
+                element: <Coverage></Coverage>,
+                loader: () => fetch('/serviceCenters.json'),
+                hydrateFallbackElement: <Loader></Loader>
             }
         ]
     },
