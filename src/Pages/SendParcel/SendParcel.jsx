@@ -4,8 +4,10 @@ import { useLoaderData } from "react-router-dom";
 import useAuth from "../../Context/Hooks/useAuth";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
+import useAxiosSecure from "../../Context/Hooks/useAxiosSecure";
 const SendParcel = () => {
 
+    const axiosSecure = useAxiosSecure()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const { user } = useAuth()
     const [deliveryCost, setDeliveryCost] = useState(null);
@@ -70,30 +72,35 @@ const SendParcel = () => {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                saveParcel(data);
+                saveParcel(data, cost);
             }
         });
     };
     // save the parcel
-    const saveParcel = (data) => {
+    const saveParcel = (data, cost) => {
         const trackingId = "TRK-" + uuidv4();
         const parcelData = {
             ...data,
-            totalCost: deliveryCost,
+            totalCost: cost,
             userEmail: user?.email,
             payment_status: 'unpaid',
             trackingId,
             delivery_status: 'not_collected',
             creation_date: new Date().toISOString(),
         };
-        console.log("Saving to DB:", parcelData);
-        Swal.fire({
-            icon: "success",
-            title: "Parcel Confirmed!",
-            text: "Your parcel has been successfully added.",
-            timer: 2000,
-            showConfirmButton: false,
-        });
+        // post parcel data in database
+        axiosSecure.post('/parcels', parcelData)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Parcel Confirmed!",
+                        text: "Your parcel has been successfully added.",
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                }
+            })
     };
 
     const getServiceCenters = (region) => {
