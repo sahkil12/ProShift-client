@@ -1,78 +1,117 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
-
-// const warehouseData = [
-//     { region: "Dhaka", centers: ["Warehouse A", "Warehouse B"] },
-//     { region: "Chittagong", centers: ["Warehouse C", "Warehouse D"] },
-//     { region: "Khulna", centers: ["Warehouse E"] },
-// ];
-
+import useAuth from "../../Context/Hooks/useAuth";
+import Swal from "sweetalert2";
+import { v4 as uuidv4 } from "uuid";
 const SendParcel = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { user } = useAuth()
     const [deliveryCost, setDeliveryCost] = useState(null);
     const serviceCenter = useLoaderData()
     const parcelType = watch("type");
     const senderRegion = watch("senderRegion");
     const receiverRegion = watch("receiverRegion");
-    const uniqueRegions = serviceCenter
-        ? [...new Set(serviceCenter?.map(item => item.region))]
-        : [];
+    const uniqueRegions = [...new Set(serviceCenter?.map(item => item.region))];
+
     const onSubmit = (data) => {
-        // Simple cost calculation example
         let cost = 0;
-        if (data.type === "document") cost = 50;
-        else cost = data.weight ? data.weight * 10 : 100;
-
+        const isWithinCity = data.senderRegion === data.receiverRegion;
+        const weight = parseFloat(data.weight) || 0;
+        //  Pricing logic 
+        if (data.type === "document") {
+            cost = isWithinCity ? 60 : 80;
+        } else {
+            if (weight <= 3) {
+                cost = isWithinCity ? 110 : 150;
+            } else {
+                const extraKg = weight - 3;
+                cost = isWithinCity
+                    ? 110 + extraKg * 40
+                    : 150 + extraKg * 40 + 40;
+            }
+        }
         setDeliveryCost(cost);
-
-        toast(
-            <div className="flex flex-col gap-3 justify-center items-center text-center ">
-                <p className="font-medium text-lg">Estimated Delivery Cost: $<b>{cost}</b></p>
-                <button
-                    className="btn w-full btn-primary text-black btn-md mt-2"
-                    onClick={() => saveParcel(data, cost)}
-                >
-                    Confirm
-                </button>
-            </div>
-            , { duration: 4000 });
+        // Detailed cost breakdown message
+        const perKgCost = 40;
+        const breakdown = `
+  <div style="text-align:left; line-height:1.9; font-size:16px;"> 
+    <p><b>Parcel Type:</b> ${data.type}</p>
+    <p><b>Weight:</b> ${weight} kg</p>
+    <p><b>Route:</b> ${isWithinCity ? "Within City" : "Outside City/District"}</p>
+    ${data.type === "document"
+                ? `<p><b>Base Cost:</b> ৳${isWithinCity ? 60 : 80}</p>`
+                : `<p><b>Base Cost (up to 3kg):</b> ৳${isWithinCity ? 110 : 150}</p>
+           <p><b>Cost per Extra 1kg:</b> ৳${perKgCost}</p>
+           ${weight > 3
+                    ? `<p><b>Extra Weight (${weight - 3}kg × ৳${perKgCost}):</b> ৳${(weight - 3) * perKgCost}</p>`
+                    : ""
+                }
+           ${!isWithinCity && weight > 3
+                    ? `<p><b>Outside City Extra:</b> ৳40</p>`
+                    : ""
+                }`
+            }
+    <hr style="margin:14px 0;"/>
+    <p style="font-size:18px;"><b>Total Estimated Cost:</b> ৳${cost}</p>
+  </div>
+`;
+        //  confirm popup
+        Swal.fire({
+            title: "📦 Confirm Your Parcel",
+            html: breakdown,
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "☑️ Confirm Parcel",
+            cancelButtonText: "✏️ Edit Details",
+            confirmButtonColor: "#0ea5e9",
+            cancelButtonColor: "#d33",
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                saveParcel(data);
+            }
+        });
     };
-
-    const saveParcel = (data, cost) => {
+    // save the parcel
+    const saveParcel = (data) => {
+        const trackingId = "TRK-" + uuidv4();
         const parcelData = {
             ...data,
-            cost,
+            totalCost: deliveryCost,
+            userEmail: user?.email,
+            payment_status: 'unpaid',
+            trackingId,
+            delivery_status: 'not_collected',
             creation_date: new Date().toISOString(),
         };
-
         console.log("Saving to DB:", parcelData);
-        toast.success("Parcel added successfully!", { duration: 2000 });
-        // TODO: Replace console.log with actual API call
+        Swal.fire({
+            icon: "success",
+            title: "Parcel Confirmed!",
+            text: "Your parcel has been successfully added.",
+            timer: 2000,
+            showConfirmButton: false,
+        });
     };
 
     const getServiceCenters = (region) => {
         if (!serviceCenter) return [];
         const items = serviceCenter.filter(item => item.region === region);
-        // const remaining = items.filter(r => r.region !== r.district)
         const centers = items.map(item => {
-
-            return [item.district];
+            return (item.district);
         });
-
         return [...new Set(centers)];
     };
 
     return (
-        <div className="max-w-full my-12 mx-auto p-7 md:p-14 bg-white shadow-md border border-gray-200 rounded-2xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-cyan-950 mb-8">Add Parcel</h1>
+        <div className="max-w-full my-10 mx-auto p-7 md:p-14 bg-white  border border-gray-200 rounded-2xl">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-cyan-950 mb-8">Send Parcel</h1>
             <div className="border-b mb-8 text-gray-300 w-11/12"></div>
             <p className="mb-6 text-cyan-950 text-2xl font-bold">Enter your parcel details</p>
             {/*   parcel details form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
                 {/* Parcel Info */}
                 <div className="py-3 rounded-lg space-y-4">
                     <div className="flex gap-4">
@@ -102,19 +141,18 @@ const SendParcel = () => {
                             type="text"
                             placeholder="Parcel Name / Title"
                             {...register("title", { required: "Parcel title required" })}
-                            className="input input-bordered w-full md:w-1/2"
+                            className="input border-2 text-base font-medium border-gray-300 focus:border-gray-500 outline-none ring-0 w-full md:w-1/2"
                         />
                         {parcelType === "non-document" && (
                             <input
                                 type="number"
                                 placeholder="Weight (kg)"
                                 {...register("weight", { min: 0 })}
-                                className="input input-bordered w-full md:w-1/2"
+                                className="input border-2 text-base font-medium border-gray-300 focus:border-gray-500 outline-none ring-0 w-full md:w-1/2"
                             />
                         )}
                     </div>
                 </div>
-
                 <hr className="border-gray-300" />
 
                 {/* Sender & Receiver Info */}
@@ -122,7 +160,7 @@ const SendParcel = () => {
 
                     {/* SENDER INFO */}
                     <div className="p-2 rounded-lg space-y-4">
-                        <h2 className="font-bold text-xl mb-4">Sender Info</h2>
+                        <h2 className="font-bold text-xl mb-4">Sender Details</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -131,19 +169,19 @@ const SendParcel = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    defaultValue="Prefilled User"
+                                    placeholder="Sender name"
                                     {...register("senderName", { required: "Sender name required" })}
-                                    className="input input-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium"
                                 />
                             </div>
 
                             <div>
                                 <label className="text-gray-600 text-sm font-semibold mb-1 block">
-                                    Pickup Service Center
+                                    Sender Pickup Service Center
                                 </label>
                                 <select
                                     {...register("senderCenter", { required: "Select service center" })}
-                                    className="select select-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="select w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium"
                                 >
                                     <option value="">Select Pickup Center</option>
                                     {getServiceCenters(senderRegion || [])?.map((center, i) => (
@@ -160,19 +198,21 @@ const SendParcel = () => {
                                 </label>
                                 <input
                                     type="text"
+                                    placeholder="Address"
                                     {...register("senderAddress", { required: "Address required" })}
-                                    className="input input-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 />
                             </div>
 
                             <div>
                                 <label className="text-gray-600 text-sm font-semibold mb-1 block">
-                                    Contact Number
+                                    Sender Contact Number
                                 </label>
                                 <input
-                                    type="text"
+                                    type="number"
+                                    placeholder="Sender Contact Number"
                                     {...register("senderContact", { required: "Contact required" })}
-                                    className="input input-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 />
                             </div>
                         </div>
@@ -180,13 +220,13 @@ const SendParcel = () => {
                         <div className="flex flex-col gap-4">
                             <div>
                                 <label className="text-gray-600 text-sm font-semibold mb-1 block">
-                                    Region
+                                    Your Region
                                 </label>
                                 <select
                                     {...register("senderRegion", { required: "Select region" })}
-                                    className="select select-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="select w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 >
-                                    <option value="">Select Region</option>
+                                    <option value="">Select Your Region</option>
                                     {uniqueRegions?.map((region, i) => (
                                         <option key={i} value={region}>
                                             {region}
@@ -201,7 +241,7 @@ const SendParcel = () => {
                                 </label>
                                 <textarea
                                     {...register("pickupInstruction", { required: "Required" })}
-                                    className="textarea textarea-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="textarea w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 />
                             </div>
                         </div>
@@ -209,7 +249,7 @@ const SendParcel = () => {
 
                     {/* RECEIVER INFO */}
                     <div className="p-2 rounded-lg space-y-4">
-                        <h2 className="font-bold text-xl mb-4">Receiver Info</h2>
+                        <h2 className="font-bold text-xl mb-4">Receiver Details</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -218,18 +258,19 @@ const SendParcel = () => {
                                 </label>
                                 <input
                                     type="text"
+                                    placeholder="Receiver Name"
                                     {...register("receiverName", { required: "Receiver name required" })}
-                                    className="input input-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 />
                             </div>
 
                             <div>
                                 <label className="text-gray-600 text-sm font-semibold mb-1 block">
-                                    Delivery Service Center
+                                    Receiver Delivery Service Center
                                 </label>
                                 <select
                                     {...register("receiverCenter", { required: "Select service center" })}
-                                    className="select select-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="select w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 >
                                     <option value="">Select Delivery Center</option>
                                     {getServiceCenters(receiverRegion || [])?.map((center, i) => (
@@ -242,23 +283,25 @@ const SendParcel = () => {
 
                             <div>
                                 <label className="text-gray-600 text-sm font-semibold mb-1 block">
-                                    Address
+                                    Receiver Address
                                 </label>
                                 <input
                                     type="text"
+                                    placeholder="Receiver Address"
                                     {...register("receiverAddress", { required: "Address required" })}
-                                    className="input input-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 />
                             </div>
 
                             <div>
                                 <label className="text-gray-600 text-sm font-semibold mb-1 block">
-                                    Contact Number
+                                    Receiver Contact Number
                                 </label>
                                 <input
                                     type="text"
+                                    placeholder="Receiver Contact Number"
                                     {...register("receiverContact", { required: "Contact required" })}
-                                    className="input input-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 />
                             </div>
                         </div>
@@ -266,11 +309,11 @@ const SendParcel = () => {
                         <div className="flex flex-col gap-4">
                             <div>
                                 <label className="text-gray-600 text-sm font-semibold mb-1 block">
-                                    Region
+                                    Receiver Region
                                 </label>
                                 <select
                                     {...register("receiverRegion", { required: "Select region" })}
-                                    className="select select-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="select w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 >
                                     <option value="">Select Region</option>
                                     {uniqueRegions?.map((region, i) => (
@@ -287,14 +330,14 @@ const SendParcel = () => {
                                 </label>
                                 <textarea
                                     {...register("deliveryInstruction", { required: "Required" })}
-                                    className="textarea textarea-bordered w-full border-gray-400 focus:border-gray-700 outline-none ring-0"
+                                    className="textarea w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <button type="submit" className="btn btn-primary w-fit px-12 m-2 text-black">
+                {/* more details added soon */}
+                <button type="submit" className="btn btn-primary w-fit px-12 py-5 text-base m-2 text-black">
                     Proceed to Confirm Booking
                 </button>
             </form>
