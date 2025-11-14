@@ -13,11 +13,16 @@ const Navbar = () => {
         <li><NavLink> Services</NavLink></li>
         <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'/coverage'}> Coverage </NavLink></li>
         <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'/sendParcel'}> Send Parcel </NavLink></li>
-        {user ? <li><NavLink> Track Order </NavLink></li> : ''}
+        {
+            user && <>
+                <li><NavLink> Track Order </NavLink></li>
+                <li><NavLink to={'/dashboard'}> Dashboard </NavLink></li>
+            </>
+        }
         <li><NavLink> About Us </NavLink></li>
         <li><NavLink> Pricing </NavLink></li>
         {user ? <li className="md:hidden flex"><NavLink> Be a Rider </NavLink></li>
-         : <li className=""><NavLink> Be a Rider </NavLink></li>}
+            : <li className=""><NavLink> Be a Rider </NavLink></li>}
     </>
     // gsap style 
     const logoRef = useRef()

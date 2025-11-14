@@ -86,7 +86,7 @@ const SendParcel = () => {
             payment_status: 'unpaid',
             trackingId,
             delivery_status: 'not_collected',
-            creation_date: new Date().toISOString(),
+            creation_at: new Date().toISOString(),
         };
         // post parcel data in database
         axiosSecure.post('/parcels', parcelData)
@@ -305,7 +305,7 @@ const SendParcel = () => {
                                     Receiver Contact Number
                                 </label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     placeholder="Receiver Contact Number"
                                     {...register("receiverContact", { required: "Contact required" })}
                                     className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium "
