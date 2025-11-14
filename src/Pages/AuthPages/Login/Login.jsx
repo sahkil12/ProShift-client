@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Context/Hooks/useAuth";
 import SocialLogin from "../SocialAccount/SocialLogin";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const { loginUser } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state || '/'
     const onSubmit = (data) => {
         const email = data.email;
         const password = data.password;
@@ -14,7 +17,8 @@ const Login = () => {
         loginUser(email, password)
             .then(result => {
                 if (result) {
-                    navigate('/')
+                    navigate(from)
+                    toast.success('You are successfully login at ProShift')
                 }
             })
             .catch(error => {
@@ -64,7 +68,7 @@ const Login = () => {
                 </div>
                 <div className="flex justify-center space-x-4">
                     {/* Google */}
-                    <SocialLogin methodName={'Login'}></SocialLogin>
+                    <SocialLogin from={from} methodName={'Login'}></SocialLogin>
                 </div>
             </div>
         </div>

@@ -2,14 +2,17 @@ import { useNavigate } from 'react-router';
 import useAuth from '../../../Context/Hooks/useAuth';
 import { FcGoogle } from 'react-icons/fc';
 
-const SocialLogin = ({ methodName }) => {
+const SocialLogin = ({ methodName, from }) => {
+    console.log(from);
     const { googleCreate } = useAuth()
     const navigate = useNavigate()
     return (
         < button onClick={() => {
             googleCreate()
                 .then(res => {
-                    navigate('/')
+                    if (res) {
+                        navigate(from || '/')
+                    }
                 })
                 .catch(error => { console.log(error) })
         }}

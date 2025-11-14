@@ -2,18 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Context/Hooks/useAuth";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import Loader from "../../../Components/Shared/Loader/Loader";
 
 const MyParcels = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const { data: parcels = [], refetch } = useQuery({
+    const { isPending, data: parcels = [], refetch } = useQuery({
         queryKey: ['myParcel', user.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/parcels?email=${user.email}`)
             return res.data
         }
     })
-
     const handleView = (parcel) => {
         Swal.fire({
             title: `Parcel Details`,
@@ -80,6 +80,8 @@ const MyParcels = () => {
         }
     };
 
+    if (isPending) return <Loader></Loader>
+
     return (
         <div className="overflow-x-auto w-full py-4 md:p-4">
             <table className="table table-zebra w-full border border-gray-300">
@@ -99,12 +101,12 @@ const MyParcels = () => {
                         <tr className="hover:bg-gray-200" key={parcel._id}>
                             <th>{index + 1}</th>
                             <td>{parcel.type === "document" ? " Document" : " Non-Document"}</td>
-                            <td className="mx-w-[150px] truncate">{parcel.title}</td>
+                            <td title={parcel.title} className="mx-w-[150px] truncate">{parcel.title}</td>
                             <td>{new Date(parcel.creation_date).toLocaleString()}</td>
                             <td className="font-bold text-base">{parcel.totalCost}</td>
                             <td>
                                 <span
-                                    className={`px-4 py-1.5 rounded-full font-semibold text-white ${parcel.payment_status === "paid" ? "bg-green-500" : "bg-red-500"
+                                    className={`px-3 py-1 rounded-full font-semibold text-white ${parcel.payment_status === "paid" ? "bg-green-500" : "bg-red-500"
                                         }`}>
                                     {parcel.payment_status.toUpperCase()}
                                 </span>

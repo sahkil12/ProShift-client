@@ -32,17 +32,17 @@ const Navbar = () => {
     useGSAP(() => {
         gsap.from(logoRef.current, {
             y: -40,
-            duration: 1.3,
+            duration: 1,
             opacity: 0
         })
         gsap.from(navRef.current, {
             y: -40,
-            duration: 1.3,
+            duration: 1,
             opacity: 0,
         })
         gsap.from(navEndRef.current, {
             y: -40,
-            duration: 1.3,
+            duration: 1,
             opacity: 0,
         })
     }, [])

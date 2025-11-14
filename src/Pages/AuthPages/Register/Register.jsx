@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../../../Context/Hooks/useAuth";
 import SocialLogin from "../SocialAccount/SocialLogin";
+import toast from "react-hot-toast";
 
 const Register = () => {
     const { createUser } = useAuth()
@@ -15,6 +16,7 @@ const Register = () => {
             .then(result => {
                 if (result) {
                     navigate('/')
+                    toast.success('You are successfully Create account at ProShift')
                 }
             })
             .catch(error => {

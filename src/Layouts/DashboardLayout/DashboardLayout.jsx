@@ -27,8 +27,9 @@ const DashboardLayout = () => {
                 <ul className="menu bg-blue-100 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden">
                     {/* Sidebar content here */}
                     <div className="mb-7">
-                          <ProShiftLogo></ProShiftLogo>
+                        <ProShiftLogo></ProShiftLogo>
                     </div>
+                    <div className="border mb-5 border-gray-400"></div>
                     <li><NavLink to={'/dashboard'}>Home</NavLink></li>
                     <li><NavLink to={'/dashboard/myParcels'}>My Parcels</NavLink></li>
                 </ul>
