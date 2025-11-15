@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router-dom";
 import useAuth from "../../Context/Hooks/useAuth";
@@ -10,7 +9,6 @@ const SendParcel = () => {
     const axiosSecure = useAxiosSecure()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const { user } = useAuth()
-    const [deliveryCost, setDeliveryCost] = useState(null);
     const serviceCenter = useLoaderData()
     const parcelType = watch("type");
     const senderRegion = watch("senderRegion");
@@ -34,7 +32,6 @@ const SendParcel = () => {
                     : 150 + extraKg * 40 + 40;
             }
         }
-        setDeliveryCost(cost);
         // Detailed cost breakdown message
         const perKgCost = 40;
         const breakdown = `

@@ -3,10 +3,12 @@ import useAuth from "../../../Context/Hooks/useAuth";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import Loader from "../../../Components/Shared/Loader/Loader";
+import { useNavigate } from "react-router";
 
 const MyParcels = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
     const { isPending, data: parcels = [], refetch } = useQuery({
         queryKey: ['myParcel', user.email],
         queryFn: async () => {
@@ -37,24 +39,28 @@ const MyParcels = () => {
         });
     };
 
-    const handlePay = async (parcel) => {
-        const result = await Swal.fire({
-            title: "Confirm Payment 💳",
-            html: `
-            <p>Pay <b>৳${parcel.totalCost}</b> for this parcel?</p>
-            `,
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Pay 💰",
-            cancelButtonText: "Cancel ❌",
-            width: '400px',
-            padding: '1.5em',
-        });
+    const handlePay = async (id) => {
 
-        if (result.isConfirmed) {
-            // Example: update payment_status in DB here
-            Swal.fire("Paid!", "Payment successful ✅", "success");
-        }
+        console.log(id);
+        navigate(`/dashboard/payment/${id}`)
+
+        // const result = await Swal.fire({
+        //     title: "Confirm Payment 💳",
+        //     html: `
+        //     <p>Pay <b>৳${parcel.totalCost}</b> for this parcel?</p>
+        //     `,
+        //     icon: "question",
+        //     showCancelButton: true,
+        //     confirmButtonText: "Pay 💰",
+        //     cancelButtonText: "Cancel ❌",
+        //     width: '400px',
+        //     padding: '1.5em',
+        // });
+
+        // if (result.isConfirmed) {
+        //     // Example: update payment_status in DB here
+        //     Swal.fire("Paid!", "Payment successful ✅", "success");
+        // }
     };
 
     const handleDelete = async (id) => {
@@ -121,7 +127,7 @@ const MyParcels = () => {
                                 {parcel.payment_status === "unpaid" && (
                                     <button
                                         className="md:px-4 btn btn-sm btn-primary text-black"
-                                        onClick={() => handlePay(parcel)}
+                                        onClick={() => handlePay(parcel._id)}
                                     >
                                         Pay
                                     </button>
