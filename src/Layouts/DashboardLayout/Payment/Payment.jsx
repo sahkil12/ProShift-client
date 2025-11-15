@@ -4,12 +4,9 @@ import PaymentForm from "./PaymentForm";
 
 const Payment = () => {
 
-    const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh")
-
+    const stripePromise = loadStripe(import.meta.env.VITE_payment_publish_key)
+    
     return (
-        // <Elements stripe={stripePromise} options={{ clientSecret }}>
-        //   <CheckoutForm parcel={parcel} />
-        // </Elements>
         <Elements stripe={stripePromise} >
             <PaymentForm />
         </Elements>

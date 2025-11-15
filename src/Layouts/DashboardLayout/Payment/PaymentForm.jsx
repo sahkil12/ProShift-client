@@ -1,14 +1,31 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import Loader from "../../../Components/Shared/Loader/Loader";
+import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
+import useAuth from "../../../Context/Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const PaymentForm = () => {
     const { id: parcelId } = useParams()
-    console.log(parcelId);
+    const { user } = useAuth()
+    const navigate = useNavigate()
     const stripe = useStripe()
     const elements = useElements()
     const [error, setError] = useState('')
+    const axiosSecure = useAxiosSecure()
 
+    const { data: parcelData = [], isPending } = useQuery({
+        queryKey: ['parcels', parcelId],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/parcels/${parcelId}`)
+            return res.data
+        }
+    })
+
+    if (isPending) return <Loader></Loader>
+    const price = parcelData.totalCost
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -18,7 +35,6 @@ const PaymentForm = () => {
         if (!card) {
             return
         }
-
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
             card,
@@ -27,11 +43,53 @@ const PaymentForm = () => {
             setError(error.message);
             return;
         } else {
+            if (paymentMethod) {
+                setError('')
+            }
+        }
+
+        const res = await axiosSecure.post(`/create-payment-intent`, { amount: price, parcelId: parcelId })
+
+        const clientSecret = res.data.clientSecret;
+
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: user?.displayName || "Unknown",
+                    email: user?.email || "no-email",
+                }
+            }
+        });
+        if (result.error) {
+            console.log("Confirm error:", result.error);
+            setError(result.error.message);
+        } else {
             setError('')
-            console.log(paymentMethod);
+        }
+        if (result.paymentIntent.status === 'succeeded') {
+            const paymentData = {
+                parcelId,
+                amount: price,
+                paymentId: result.paymentIntent.id,
+                userEmail: user?.email,
+                transactionId: parcelData.trackingId,
+                payment_method: result.paymentIntent.payment_method_types,
+            }
+            const paymentsRes = await axiosSecure.post(`/payments`, paymentData)
+            if (paymentsRes.data.paymentResult) {
+                Swal.fire({
+                    title: "Payment Successful ✅",
+                    html: `<p>Transaction ID : <b class="py-6">${parcelData.trackingId}</b></p>`,
+                    icon: "success",
+                    confirmButtonText: "Go to My Parcels"
+                }).then(() => {
+                    // Redirect to My Parcels page
+                    navigate("/dashboard/myParcels");
+                });
+            }
         }
     }
-
     return (
         <div className="">
             <form onSubmit={handleSubmit} className="space-y-3 border-2 border-gray-500 bg-green-100 text-black my-12 max-w-2xl mx-auto p-6 rounded-xl">
@@ -52,8 +110,8 @@ const PaymentForm = () => {
                     }}
                     className="border p-4 rounded text-black" />
                 {error && <p className="font-medium text-red-400 ">{error}</p>}
-                <button className="btn text-black px-10 btn-primary mt-4" disabled={!stripe}>
-                    Pay Now
+                <button className="btn font-bold text-base w-full text-black px-10 btn-primary mt-4" disabled={!stripe}>
+                    Pay {price}
                 </button>
             </form>
         </div>

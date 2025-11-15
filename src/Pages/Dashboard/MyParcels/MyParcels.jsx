@@ -41,26 +41,7 @@ const MyParcels = () => {
 
     const handlePay = async (id) => {
 
-        console.log(id);
         navigate(`/dashboard/payment/${id}`)
-
-        // const result = await Swal.fire({
-        //     title: "Confirm Payment 💳",
-        //     html: `
-        //     <p>Pay <b>৳${parcel.totalCost}</b> for this parcel?</p>
-        //     `,
-        //     icon: "question",
-        //     showCancelButton: true,
-        //     confirmButtonText: "Pay 💰",
-        //     cancelButtonText: "Cancel ❌",
-        //     width: '400px',
-        //     padding: '1.5em',
-        // });
-
-        // if (result.isConfirmed) {
-        //     // Example: update payment_status in DB here
-        //     Swal.fire("Paid!", "Payment successful ✅", "success");
-        // }
     };
 
     const handleDelete = async (id) => {
@@ -77,7 +58,6 @@ const MyParcels = () => {
             //  delete parcel from mongodb
             axiosSecure.delete(`/parcels/${id}`)
                 .then(res => {
-                    console.log(res.data);
                     if (res.data.deletedCount) {
                         Swal.fire("Deleted!", "Parcel removed ✅", "success");
                     }
@@ -124,14 +104,17 @@ const MyParcels = () => {
                                 >
                                     View
                                 </button>
-                                {parcel.payment_status === "unpaid" && (
-                                    <button
-                                        className="md:px-4 btn btn-sm btn-primary text-black"
-                                        onClick={() => handlePay(parcel._id)}
-                                    >
-                                        Pay
-                                    </button>
-                                )}
+                                {/* {parcel.payment_status === "unpaid" && (
+                                    
+                                )} */}
+                                <button
+                                    disabled={parcel.payment_status === "paid"}
+                                    className={`md:px-4 btn btn-sm btn-primary text-black ${parcel.payment_status === "paid" && 'cursor-not-allowed'}`}
+                                    onClick={() => handlePay(parcel._id)}
+                                >
+                                    {parcel.payment_status === "paid" ? 'Paid' : 'Pay'}
+                                </button>
+
                                 <button
                                     className="md:px-4 btn btn-sm bg-red-500 text-white"
                                     onClick={() => handleDelete(parcel._id)}
