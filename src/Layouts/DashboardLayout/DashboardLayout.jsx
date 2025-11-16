@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 import ProShiftLogo from "../../Components/Shared/ProShiftLogo/ProShiftLogo";
 import { RiMenuUnfold2Fill } from "react-icons/ri";
+import { FaHome, FaBox, FaMoneyBillWave, FaSearchLocation, FaUserEdit } from "react-icons/fa";
 
 const DashboardLayout = () => {
     return (
@@ -24,14 +25,51 @@ const DashboardLayout = () => {
 
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-blue-100 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden">
+                <ul className="menu bg-blue-100 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden space-y-3">
                     {/* Sidebar content here */}
                     <div className="mb-7">
                         <ProShiftLogo></ProShiftLogo>
                     </div>
                     <div className="border mb-5 border-gray-400"></div>
-                    <li><NavLink to={'/dashboard'}>Home</NavLink></li>
-                    <li><NavLink to={'/dashboard/myParcels'}>My Parcels</NavLink></li>
+                    <li>
+                        <NavLink to="/dashboard" >
+                            <span className={`flex items-center gap-4 text-gray-700 font-semibold`}>
+                                <FaHome /> Home
+                            </span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/dashboard/myParcels">
+                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                <FaBox /> My Parcels
+                            </span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/dashboard/payment-history">
+                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                <FaMoneyBillWave /> Payment History
+                            </span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/dashboard/track">
+                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                <FaSearchLocation /> Track a Package
+                            </span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/dashboard/update-profile">
+                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                <FaUserEdit /> Update Profile
+                            </span>
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>

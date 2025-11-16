@@ -3,7 +3,6 @@ import useAuth from '../../../Context/Hooks/useAuth';
 import { FcGoogle } from 'react-icons/fc';
 
 const SocialLogin = ({ methodName, from }) => {
-    console.log(from);
     const { googleCreate } = useAuth()
     const navigate = useNavigate()
     return (

@@ -69,63 +69,66 @@ const MyParcels = () => {
     if (isPending) return <Loader></Loader>
 
     return (
-        <div className="overflow-x-auto w-full py-4 md:p-4">
-            <table className="table table-zebra w-full border border-gray-300">
-                <thead className="bg-gray-300 text-base">
-                    <tr>
-                        <th>#</th>
-                        <th>Type</th>
-                        <th>Title</th>
-                        <th>Created At</th>
-                        <th>Total Cost (৳)</th>
-                        <th>Payment Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {parcels.map((parcel, index) => (
-                        <tr className="hover:bg-gray-200" key={parcel._id}>
-                            <th>{index + 1}</th>
-                            <td>{parcel.type === "document" ? " Document" : " Non-Document"}</td>
-                            <td title={parcel.title} className="mx-w-[150px] truncate">{parcel.title}</td>
-                            <td>{new Date(parcel.creation_date).toLocaleString()}</td>
-                            <td className="font-bold text-base">{parcel.totalCost}</td>
-                            <td>
-                                <span
-                                    className={`px-3 py-1 rounded-full font-semibold text-white ${parcel.payment_status === "paid" ? "bg-green-500" : "bg-red-500"
-                                        }`}>
-                                    {parcel.payment_status.toUpperCase()}
-                                </span>
-                            </td>
-                            <td className="flex gap-2">
-                                <button
-                                    className="btn md:px-3 btn-sm bg-blue-500 text-white"
-                                    onClick={() => handleView(parcel)}
-                                >
-                                    View
-                                </button>
-                                {/* {parcel.payment_status === "unpaid" && (
+        <div>
+            <h2 className="p-4 text-4xl md:text-5xl font-bold text-teal-950 my-3">My Parcels</h2>
+            <div className="overflow-x-auto w-full py-4 md:p-4">
+                <table className="table table-zebra w-full border border-gray-300">
+                    <thead className="bg-gray-300 text-base">
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Created At</th>
+                            <th>Total Cost (৳)</th>
+                            <th>Payment Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {parcels.map((parcel, index) => (
+                            <tr className="hover:bg-gray-200" key={parcel._id}>
+                                <th>{index + 1}</th>
+                                <td>{parcel.type === "document" ? " Document" : " Non-Document"}</td>
+                                <td title={parcel.title} className="mx-w-[150px] truncate">{parcel.title}</td>
+                                <td>{new Date(parcel.creation_date).toLocaleString()}</td>
+                                <td className="font-bold text-base">{parcel.totalCost}</td>
+                                <td>
+                                    <span
+                                        className={`px-3 py-1 rounded-full font-semibold text-white ${parcel.payment_status === "paid" ? "bg-green-500" : "bg-red-500"
+                                            }`}>
+                                        {parcel.payment_status.toUpperCase()}
+                                    </span>
+                                </td>
+                                <td className="flex gap-2">
+                                    <button
+                                        className="btn md:px-3 btn-sm bg-blue-500 text-white"
+                                        onClick={() => handleView(parcel)}
+                                    >
+                                        View
+                                    </button>
+                                    {/* {parcel.payment_status === "unpaid" && (
                                     
                                 )} */}
-                                <button
-                                    disabled={parcel.payment_status === "paid"}
-                                    className={`md:px-4 btn btn-sm btn-primary text-black ${parcel.payment_status === "paid" && 'cursor-not-allowed'}`}
-                                    onClick={() => handlePay(parcel._id)}
-                                >
-                                    {parcel.payment_status === "paid" ? 'Paid' : 'Pay'}
-                                </button>
+                                    <button
+                                        disabled={parcel.payment_status === "paid"}
+                                        className={`md:px-4 btn btn-sm btn-primary text-black ${parcel.payment_status === "paid" && 'cursor-not-allowed'}`}
+                                        onClick={() => handlePay(parcel._id)}
+                                    >
+                                        {parcel.payment_status === "paid" ? 'Paid' : 'Pay'}
+                                    </button>
 
-                                <button
-                                    className="md:px-4 btn btn-sm bg-red-500 text-white"
-                                    onClick={() => handleDelete(parcel._id)}
-                                >
-                                    🗑 Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                                    <button
+                                        className="md:px-4 btn btn-sm bg-red-500 text-white"
+                                        onClick={() => handleDelete(parcel._id)}
+                                    >
+                                        🗑 Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

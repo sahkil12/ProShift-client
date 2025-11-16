@@ -3,26 +3,54 @@ import { Link, useNavigate } from "react-router";
 import useAuth from "../../../Context/Hooks/useAuth";
 import SocialLogin from "../SocialAccount/SocialLogin";
 import toast from "react-hot-toast";
+import { TbUserUp } from "react-icons/tb";
+import { useState } from "react";
+import axios from "axios";
 
 const Register = () => {
-    const { createUser } = useAuth()
+    const { createUser, updateUserProfile } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const navigate = useNavigate()
+    const [profilePic, setProfilePic] = useState('');
+    const [preview, setPreview] = useState(null);
+
+    const handlePhotoChange = async (e) => {
+        const image = e.target.files[0];
+        if (!image) return
+        setPreview(URL.createObjectURL(image));
+        const formData = new FormData();
+        formData.append('image', image)
+        const imageUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`
+
+        const res = await axios.post(imageUrl, formData)
+        setProfilePic(res.data.data.url);
+    }
 
     const onSubmit = (data) => {
         const email = data.email;
         const password = data.password;
+        const name = data.name;
         createUser(email, password)
             .then(result => {
                 if (result) {
-                    navigate('/')
-                    toast.success('You are successfully Create account at ProShift')
+                    updateUserProfile({
+                        displayName: name,
+                        photoURL: profilePic
+                    })
+                        .then(res => {
+                            if (res) {
+                                toast.success('You are successfully Create account at ProShift')
+                                navigate('/')
+                            }
+                        })
+                        .catch(() => { 'error' })
                 }
             })
             .catch(error => {
                 console.log(error);
             })
     }
+
     return (
         <div>
             <div className="w-full max-w-xl mx-auto p-8 space-y-3 rounded-xl bg-gray-50text-gray-800 my-7">
@@ -32,6 +60,24 @@ const Register = () => {
                 </div>
                 {/* form */}
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 pb-3">
+                    {/* image */}
+                    <div className="">
+                        <label className="w-18 h-18 rounded-full border-2 border-gray-400 bg-gray-50 flex items-center justify-center cursor-pointer hover:border-teal-600">
+                            {preview ? (
+                                <img src={preview} alt="" className="w-[66px] h-[66px] object-cover rounded-full" />
+                            ) : (<TbUserUp className="text-3xl font-extrabold text-gray-700" />)}
+                            <input
+                                {...register("photo", { required: true })}
+                                type="file"
+                                accept=""
+                                className="hidden"
+                                onChange={handlePhotoChange}
+                            />
+
+                        </label>
+                        {errors.photo && <p className="text-red-500 mt-2">Please upload a photo</p>}
+                    </div>
+
                     {/* name */}
                     <div className="space-y-1 text-base">
                         <label className="font-semibold block text-gray-800">
@@ -39,7 +85,7 @@ const Register = () => {
                         </label>
                         <input
                             {...register("name", { required: true, minLength: 5 })}
-                            type="name" placeholder="Your Name"
+                            type="text" placeholder="Your Name"
                             className="w-full px-4 py-3.5 text-lg font-semibold rounded-md border-2 border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:border-gray-500" />
                         {/* error handle */}
                         {errors.name?.type === 'minLength' && <p className="text-red-500 font-medium ">Name Should be 5 character or long</p>}

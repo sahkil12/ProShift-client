@@ -47,7 +47,6 @@ const PaymentForm = () => {
                 setError('')
             }
         }
-
         const res = await axiosSecure.post(`/create-payment-intent`, { amount: price, parcelId: parcelId })
 
         const clientSecret = res.data.clientSecret;
@@ -62,7 +61,6 @@ const PaymentForm = () => {
             }
         });
         if (result.error) {
-            console.log("Confirm error:", result.error);
             setError(result.error.message);
         } else {
             setError('')
@@ -79,8 +77,8 @@ const PaymentForm = () => {
             const paymentsRes = await axiosSecure.post(`/payments`, paymentData)
             if (paymentsRes.data.paymentResult) {
                 Swal.fire({
-                    title: "Payment Successful ✅",
-                    html: `<p>Transaction ID : <b class="py-6">${parcelData.trackingId}</b></p>`,
+                    title: "Payment Successful ",
+                    html: `<p>Transaction ID : <b>${parcelData.trackingId}</b></p>`,
                     icon: "success",
                     confirmButtonText: "Go to My Parcels"
                 }).then(() => {
@@ -91,7 +89,7 @@ const PaymentForm = () => {
         }
     }
     return (
-        <div className="">
+        <div>
             <form onSubmit={handleSubmit} className="space-y-3 border-2 border-gray-500 bg-green-100 text-black my-12 max-w-2xl mx-auto p-6 rounded-xl">
                 <CardElement
                     options={{
