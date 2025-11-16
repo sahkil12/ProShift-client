@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { TbUserUp } from "react-icons/tb";
 import { useState } from "react";
 import axios from "axios";
+import useAxios from "../../../Context/Hooks/useAxios";
 
 const Register = () => {
     const { createUser, updateUserProfile } = useAuth()
@@ -13,6 +14,7 @@ const Register = () => {
     const navigate = useNavigate()
     const [profilePic, setProfilePic] = useState('');
     const [preview, setPreview] = useState(null);
+    const axiosPublic = useAxios()
 
     const handlePhotoChange = async (e) => {
         const image = e.target.files[0];
@@ -26,29 +28,45 @@ const Register = () => {
         setProfilePic(res.data.data.url);
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const email = data.email;
         const password = data.password;
         const name = data.name;
-        createUser(email, password)
-            .then(result => {
-                if (result) {
+        try {
+            const result = createUser(email, password)
+
+            if (result) {
+                const userInfo = {
+                    name: name,
+                    email: email,
+                    role: 'user',
+                    photoURL: profilePic,
+                    created_at: new Date().toISOString(),
+                    last_login: new Date().toISOString()
+                }
+
+                const userRes = await axiosPublic.post('/users', userInfo)
+                if (userRes.data.insertedId) {
+                    // update userinfo in the database
                     updateUserProfile({
                         displayName: name,
                         photoURL: profilePic
                     })
                         .then(res => {
-                            if (res) {
-                                toast.success('You are successfully Create account at ProShift')
-                                navigate('/')
-                            }
+                            toast.success('You have successfully created an account at ProShift');
+                            navigate('/');
+                        }).catch(error =>{
+                            console.log(error);
                         })
-                        .catch(() => { 'error' })
+
+
                 }
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            }
+        }
+        catch (error) {
+            console.log(error);
+            toast.error('Something went wrong!');
+        }
     }
 
     return (
