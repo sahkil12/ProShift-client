@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import ProShiftLogo from "../ProShiftLogo/ProShiftLogo";
 import { IoArrowForward } from "react-icons/io5";
 import useAuth from "../../../Context/Hooks/useAuth";
@@ -8,6 +8,7 @@ import gsap from "gsap";
 
 const Navbar = () => {
     const { user, logOutUser } = useAuth()
+    const navigate = useNavigate()
     const activeClasses = 'py-3 px-5 text-gray-700 transition duration-500 rounded-full font-bold bg-primary'
     const navItems = <>
         <li><NavLink> Services</NavLink></li>
@@ -21,8 +22,8 @@ const Navbar = () => {
         }
         <li><NavLink> About Us </NavLink></li>
         <li><NavLink> Pricing </NavLink></li>
-        {user ? <li className="md:hidden flex"><NavLink> Be a Rider </NavLink></li>
-            : <li className=""><NavLink> Be a Rider </NavLink></li>}
+        {user ? <li  className="md:hidden flex"><NavLink to={'/be_a_rider'}> Be a Rider </NavLink></li>
+            : ''}
     </>
     // gsap style 
     const logoRef = useRef()
@@ -74,8 +75,8 @@ const Navbar = () => {
                 <div className="flex items-center gap-4">
                     {/* bea a rider button */}
                     {
-                        user && <div className="hidden md:flex w-fit mx-auto items-center">
-                            <button className="py-2.5 px-7 font-bold text-lg rounded-xl bg-primary">Be a rider</button>
+                        user && <div onClick={()=> {navigate('/be_a_rider')}} className="hidden cursor-pointer md:flex w-fit mx-auto items-center">
+                            <button className="py-2.5 px-7 font-bold text-lg rounded-xl cursor-pointer bg-primary">Be a rider</button>
                             <span className="p-1.5 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
                         </div>
                     }

@@ -44,7 +44,7 @@ const Register = () => {
                     created_at: new Date().toISOString(),
                     last_login: new Date().toISOString()
                 }
-
+                // post user data 
                 const userRes = await axiosPublic.post('/users', userInfo)
                 if (userRes.data.insertedId) {
                     // update userinfo in the database
@@ -55,7 +55,7 @@ const Register = () => {
                         .then(res => {
                             toast.success('You have successfully created an account at ProShift');
                             navigate('/');
-                        }).catch(error =>{
+                        }).catch(error => {
                             console.log(error);
                         })
 
