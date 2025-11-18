@@ -6,12 +6,12 @@ import useAxiosSecure from "../../Context/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const BeARider = () => {
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const { user } = useAuth()
   const serviceCenters = useLoaderData([])
   const axiosSecure = useAxiosSecure()
   const selectedRegion = watch("region");
-  // Extract unique regions
+  // find unique regions
   const regions = [...new Set(serviceCenters.map(sc => sc.region))];
 
   const getServiceCenters = (region) => {
@@ -24,26 +24,24 @@ const BeARider = () => {
 
   const onSubmit = (data) => {
     const { pickupInstruction, ...formData } = data
-    const riderFormData={
+    const riderFormData = {
       ...formData,
-      status:'pending',
+      status: 'Pending',
       created_at: new Date().toISOString()
     }
-    console.log("Rider Form Submitted:", riderFormData);
     axiosSecure.post("/riders", riderFormData)
-    .then(res =>{
-        console.log(res.data);
-        if(res.data.insertedId){
+      .then(res => {
+        if (res.data.insertedId) {
           Swal.fire({
-            icon:'success',
-            title:'Application Submitted',
+            icon: 'success',
+            title: 'Application Submitted',
             text: "Your application is pending approval"
           })
         }
-    })
-    .catch(error=>{
-      console.log(error);
-    })
+      })
+      .catch(error => {
+        console.log(error);
+      })
     // reset();
   };
   return (
@@ -80,10 +78,17 @@ const BeARider = () => {
                 <label className="text-gray-600 text-base font-semibold mb-1 block">Your Age</label>
                 <input
                   type="number"
-                  {...register("age", { required: true })}
+                  {...register("age", {
+                    required: 'Age is required',
+                    min: {
+                      value: 1,
+                      message: "Age must be a positive number"
+                    }
+                  })}
                   className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium"
                   placeholder="Age"
                 />
+                {errors.age && <p className="text-red-500 text-sm mt-2">{errors.age.message}</p>}
               </div>
             </div>
             {/* Row 2 */}
@@ -123,20 +128,35 @@ const BeARider = () => {
                 <label className="text-gray-600 text-base font-semibold mb-1 block">NID No</label>
                 <input
                   type="number"
-                  {...register("nid", { required: true })}
+                  {...register("nid", {
+                    minLength: {
+                      value: 8,
+                      message: "NID must be at least 8 characters"
+                    }
+                  })}
                   className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium"
                   placeholder="Your NID number"
                 />
+                {errors.nid && <p className="text-red-500 text-sm mt-2">{errors.nid.message}</p>}
               </div>
               {/* phone number */}
               <div>
                 <label className="text-gray-600 text-base font-semibold mb-1 block">Contact No</label>
                 <input
                   type="number"
-                  {...register("phone", { required: true })}
+                  {...register("phone", {
+                    required: 'Phone number is required',
+                    pattern: {
+                      value: /^(01)[3-9]\d{8}$/,
+                      message: "Enter a valid BD phone number"
+                    }
+                  })}
                   className="input w-full border-2 border-gray-300 focus:border-gray-500 outline-none ring-0 text-base font-medium"
-                  placeholder="Phone number"
+                  placeholder="01XXXXXXXXX"
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-2">{errors.phone.message}</p>
+                )}
               </div>
             </div>
             {/* Service Center */}

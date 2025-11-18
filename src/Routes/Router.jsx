@@ -13,6 +13,10 @@ import MyParcels from "../Pages/Dashboard/MyParcels/MyParcels";
 import Payment from "../Layouts/DashboardLayout/Payment/Payment";
 import PaymentHistory from "../Layouts/DashboardLayout/Payment/PaymentHistory/PaymentHistory";
 import BeARider from "../Pages/BeARider/BeARider";
+import TrackAPackage from "../Pages/Dashboard/TrackAPackage/TrackAPackage";
+import UpdateProfile from "../Pages/Dashboard/UpdateProfile/UpdateProfile";
+import ActiveRiders from "../Pages/Dashboard/ActiveRiders/ActiveRiders";
+import PendingRiders from "../Pages/Dashboard/PendingRiders/PendingRiders";
 
 export const router = createBrowserRouter([
     {
@@ -73,6 +77,22 @@ export const router = createBrowserRouter([
             {
                 path: 'payment-history',
                 element: <PaymentHistory></PaymentHistory>
+            },
+            {
+                path: 'track',
+                element: <TrackAPackage></TrackAPackage>
+            },
+            {
+                path: 'update-profile',
+                element: <UpdateProfile></UpdateProfile>
+            },
+            {
+                path: 'active-riders',
+                element: <ActiveRiders></ActiveRiders>
+            },
+            {
+                path: 'pending-riders',
+                element: <PendingRiders></PendingRiders>
             }
         ]
     }
