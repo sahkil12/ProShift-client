@@ -37,7 +37,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'be_a_rider',
-                element: <PrivateRoute> <BeARider></BeARider> </PrivateRoute>
+                element: <PrivateRoute> <BeARider></BeARider> </PrivateRoute>,
+                loader: () => fetch('/serviceCenters.json'),
+                hydrateFallbackElement: <Loader></Loader>
             }
         ]
     },
