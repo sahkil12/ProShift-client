@@ -16,7 +16,6 @@ const Navbar = () => {
         <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'/sendParcel'}> Send Parcel </NavLink></li>
         {
             user && <>
-                <li><NavLink> Track Order </NavLink></li>
                 <li><NavLink to={'/dashboard'}> Dashboard </NavLink></li>
             </>
         }

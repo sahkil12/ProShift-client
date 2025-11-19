@@ -17,7 +17,6 @@ const PendingRiders = () => {
                return res.data
           }
      })
-     console.log(riders);
 
      const handleApprove = async (id) => {
           const result = await Swal.fire({
@@ -29,6 +28,7 @@ const PendingRiders = () => {
           });
           if (!result.isConfirmed) return;
           const res = await axiosSecure.patch(`/riders/approve/${id}`);
+          console.log(res.data);
           // check and success message
           if (res.data.modifiedCount > 0) {
                refetch()
@@ -86,7 +86,7 @@ const PendingRiders = () => {
                                              <span className="badge font-bold py-4 badge-warning">{rider.status}</span>
                                         </td>
 
-                                        <td className="flex gap-3">
+                                        <td className="flex items-center gap-3">
                                              <button
                                                   className="btn btn-sm btn-info"
                                                   onClick={() => setSelectedRider(rider)}
@@ -119,7 +119,7 @@ const PendingRiders = () => {
                {selectedRider && (
                     <dialog open className="modal">
                          <div className="modal-box w-11/12 max-w-2xl">
-                              <h3 className="text-xl font-semibold mb-4">Rider Information</h3>
+                              <h3 className="text-3xl font-bold border-b-2 pb-5 border-gray-300 mb-6">Rider Information</h3>
 
                               <div className="space-y-2">
                                    <p><strong>Name:</strong> {selectedRider.name}</p>
@@ -132,11 +132,11 @@ const PendingRiders = () => {
                                    <p><strong>Experience:</strong> {selectedRider.experience}</p>
                                    <p><strong>NID:</strong> {selectedRider.nid}</p>
                                    <p><strong>More Info:</strong> {selectedRider.information}</p>
-                                   <p><strong>Created At:</strong> {new Date(selectedRider.created_at).toLocaleString()}</p>
+                                   <p><strong>Applied At:</strong> {new Date(selectedRider.created_at).toLocaleString()}</p>
                               </div>
 
                               <div className="modal-action">
-                                   <button className="btn" onClick={() => setSelectedRider(null)}>
+                                   <button className="btn w-full mt-6 font-bold bg-primary" onClick={() => setSelectedRider(null)}>
                                         Close
                                    </button>
                               </div>
