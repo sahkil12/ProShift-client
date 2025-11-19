@@ -20,6 +20,7 @@ const ActiveRiders = () => {
                const res = await axiosPublic.get(`/riders/active?search=${finalSearch}`);
                return res.data;
           },
+          keepPreviousData: true
      });
 
      if (isLoading) return <Loader></Loader>
@@ -37,29 +38,23 @@ const ActiveRiders = () => {
                showCancelButton: true,
                confirmButtonText: "Deactivate",
           });
-
           if (!result.isConfirmed) return;
 
           const res = await axiosSecure.patch(`/riders/deactivate/${id}`);
-          console.log(res.data);
           if (res.data.modifiedCount > 0) {
                refetch()
                Swal.fire("Deactivated!", "Rider is now inactive.", "success");
           }
      };
-
      return (
           <div className="">
                <div className="p-4">
                     <h2 className=" text-4xl md:text-5xl font-bold text-teal-950 mt-3
                     mb-8 ">Active Riders</h2>
-
                     {/* Search Bar */}
                     <form onSubmit={handleSearch} >
                          <div className="relative max-w-md flex items-center">
-
-                              <FiSearch className="absolute left-4 text-gray-500 text-xl" />
-
+                              <FiSearch className="absolute z-1 left-3 text-gray-500 text-lg" />
                               <input
                                    type="text"
                                    value={searchText}
@@ -67,7 +62,7 @@ const ActiveRiders = () => {
                                    placeholder="Search District..."
                                    className="input w-full pl-10 pr-24 rounded-full"
                               />
-
+                              {/* search button */}
                               <button
                                    type="submit"
                                    className="btn btn-primary absolute right-0 text-black rounded-full px-6"
@@ -103,7 +98,7 @@ const ActiveRiders = () => {
                                         <td>{rider.district}</td>
                                         <td>{rider.region}</td>
                                         <td>
-                                             <span className="badge badge-success font-bold py-4 ">Active</span>
+                                             <span className="badge badge-success font-bold py-4 ">{rider.status}</span>
                                         </td>
 
                                         <td>
@@ -116,11 +111,10 @@ const ActiveRiders = () => {
                                         </td>
                                    </tr>
                               ))}
-
                               {riders.length === 0 && (
                                    <tr>
-                                        <td colSpan="8" className="text-center py-6 text-gray-500 text-2xl">
-                                             No riders found...
+                                        <td colSpan="8" className="text-center py-8 text-gray-500 text-2xl">
+                                             No Active riders found...
                                         </td>
                                    </tr>
                               )}
