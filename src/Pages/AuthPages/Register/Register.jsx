@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Context/Hooks/useAuth";
 import SocialLogin from "../SocialAccount/SocialLogin";
 import toast from "react-hot-toast";
@@ -15,6 +15,8 @@ const Register = () => {
     const [profilePic, setProfilePic] = useState('');
     const [preview, setPreview] = useState(null);
     const axiosPublic = useAxios()
+    const location = useLocation()
+    const from = location.state?.from || "/";
 
     const handlePhotoChange = async (e) => {
         const image = e.target.files[0];
@@ -33,8 +35,7 @@ const Register = () => {
         const password = data.password;
         const name = data.name;
         try {
-            const result = createUser(email, password)
-
+            const result = await createUser(email, password)
             if (result) {
                 const userInfo = {
                     name: name,
@@ -46,20 +47,19 @@ const Register = () => {
                 }
                 // post user data 
                 const userRes = await axiosPublic.post('/users', userInfo)
+                console.log(userRes.data);
                 if (userRes.data.insertedId) {
                     // update userinfo in the database
-                    updateUserProfile({
+                    await updateUserProfile({
                         displayName: name,
                         photoURL: profilePic
                     })
                         .then(res => {
                             toast.success('You have successfully created an account at ProShift');
-                            navigate('/');
+                            navigate(from);
                         }).catch(error => {
                             console.log(error);
                         })
-
-
                 }
             }
         }

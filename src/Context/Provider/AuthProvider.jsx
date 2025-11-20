@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import { auth } from "../../Firebase/firebase.init";
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     // providers    
     const googleProvider = new GoogleAuthProvider()

@@ -20,7 +20,6 @@ const ActiveRiders = () => {
                const res = await axiosPublic.get(`/riders/active?search=${finalSearch}`);
                return res.data;
           },
-          keepPreviousData: true
      });
 
      if (isLoading) return <Loader></Loader>
@@ -53,7 +52,7 @@ const ActiveRiders = () => {
                     mb-8 ">Active Riders</h2>
                     {/* Search Bar */}
                     <form onSubmit={handleSearch} >
-                         <div className="relative max-w-md flex items-center">
+                         <div className="relative max-w-sm flex items-center">
                               <FiSearch className="absolute z-1 left-3 text-gray-500 text-lg" />
                               <input
                                    type="text"
@@ -113,7 +112,7 @@ const ActiveRiders = () => {
                               ))}
                               {riders.length === 0 && (
                                    <tr>
-                                        <td colSpan="8" className="text-center py-8 text-gray-500 text-2xl">
+                                        <td colSpan="8" className="text-center py-10 text-gray-500 text-2xl">
                                              No Active riders found...
                                         </td>
                                    </tr>

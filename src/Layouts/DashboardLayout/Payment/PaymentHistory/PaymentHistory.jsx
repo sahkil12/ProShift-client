@@ -74,14 +74,17 @@ const PaymentHistory = () => {
                                 </td>
                             </tr>
                         ))}
+                        {
+                            payments.length === 0 && (
+                                <tr>
+                                    <td colSpan="8" className="text-center py-10 text-gray-500 text-2xl">
+                                        No payments history found
+                                    </td>
+                                </tr>
+                            )
+                        }
                     </tbody>
                 </table>
-
-                {payments.length === 0 && (
-                    <p className="text-center text-2xl py-10 text-gray-500">
-                        No payments found
-                    </p>
-                )}
             </div>
         </div>
     );

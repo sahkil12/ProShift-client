@@ -126,6 +126,15 @@ const MyParcels = () => {
                                 </td>
                             </tr>
                         ))}
+                        {
+                            parcels.length === 0 && (
+                                <tr>
+                                    <td colSpan="8" className="text-center py-10 text-gray-500 text-2xl">
+                                        You Don't Added Any Parcel Yet
+                                    </td>
+                                </tr>
+                            )
+                        }
                     </tbody>
                 </table>
             </div>

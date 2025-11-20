@@ -9,7 +9,7 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location?.state || '/'
+    const from = location.state?.from || "/";
     const onSubmit = (data) => {
         const email = data.email;
         const password = data.password;
@@ -60,7 +60,7 @@ const Login = () => {
                     </div>
                     <button className="block text-lg w-full p-3 text-center rounded-md text-black font-bold bg-primary">Login</button>
                 </form>
-                <span className="font-medium text-lg text-gray-500">Don't have an account? <Link to={'/register'}><b className="text-emerald-800 hover:underline">Register</b></Link> </span>
+                <span className="font-medium text-lg text-gray-500">Don't have an account? <Link state={{ from }} to={'/register'}><b className="text-emerald-800 hover:underline">Register</b></Link> </span>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
                     <p className="px-3 text-sm text-gray-600"> Or Login with </p>
