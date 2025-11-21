@@ -17,7 +17,7 @@ const PendingRiders = () => {
                return res.data
           }
      })
-
+     // accept rider handle
      const handleApprove = async (id) => {
           const result = await Swal.fire({
                title: "Approve Rider?",
@@ -28,14 +28,13 @@ const PendingRiders = () => {
           });
           if (!result.isConfirmed) return;
           const res = await axiosSecure.patch(`/riders/approve/${id}`);
-          console.log(res.data);
           // check and success message
-          if (res.data.modifiedCount > 0) {
+          if (res.data.riderUpdate.modifiedCount > 0) {
                refetch()
                Swal.fire("Approved!", "Rider approved successfully.", "success");
           }
      }
-     // handle reject 
+     // handle reject rider
      const handleReject = async (id) => {
           const result = await Swal.fire({
                title: "Reject Rider?",
@@ -45,12 +44,11 @@ const PendingRiders = () => {
                confirmButtonText: "Reject",
           });
           if (!result.isConfirmed) return;
-
           const res = await axiosSecure.patch(`/riders/reject/${id}`)
 
           if (res.data.modifiedCount > 0) {
                refetch()
-               Swal.fire("Rejected!", "Rider rejected successfully.", "success");
+               Swal.fire("Rejected!", "Rider application rejected.", "success");
           }
      };
 

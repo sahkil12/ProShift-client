@@ -6,7 +6,7 @@ import useAxiosSecure from "../../Context/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const BeARider = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
   const { user } = useAuth()
   const serviceCenters = useLoaderData([])
   const axiosSecure = useAxiosSecure()
@@ -31,18 +31,29 @@ const BeARider = () => {
     }
     axiosSecure.post("/riders", riderFormData)
       .then(res => {
-        if (res.data.insertedId) {
+        if (res.data?.insertedId) {
           Swal.fire({
             icon: 'success',
             title: 'Application Submitted',
             text: "Your application is pending approval"
           })
         }
+        else if (res.data.modifiedCount) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Application Submitted',
+            text: "Your application is pending approval Updated"
+          })
+        }
       })
       .catch(error => {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Application Failed",
+          text: error.response?.data?.message || "Something went wrong"
+        });
       })
-    // reset();
+    reset();
   };
   return (
     <div className="bg-white my-10 py-5 md:py-8 rounded-2xl border border-gray-200">
