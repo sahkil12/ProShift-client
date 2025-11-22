@@ -6,19 +6,23 @@ const axiosSecure = axios.create({
     baseURL: `http://localhost:5000`
 })
 
+
 const useAxiosSecure = () => {
-    const { user } = useAuth()
+    const { user } = useAuth();
 
-    axiosSecure.interceptors.request.use((config) => {
+    axiosSecure.interceptors.request.use(
+        async (config) => {
+            if (user) {
+                const token = user.accessToken;
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
+    );
 
-        config.headers.Authorization = `Bearer ${user.accessToken}`
-        return config
-
-    }), (error => {
-        return Promise.reject(error)
-    })
-
-    return axiosSecure
+    return axiosSecure;
 };
-
 export default useAxiosSecure;

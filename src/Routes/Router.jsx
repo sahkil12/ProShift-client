@@ -17,6 +17,7 @@ import TrackAPackage from "../Pages/Dashboard/TrackAPackage/TrackAPackage";
 import UpdateProfile from "../Pages/Dashboard/UpdateProfile/UpdateProfile";
 import ActiveRiders from "../Pages/Dashboard/ActiveRiders/ActiveRiders";
 import PendingRiders from "../Pages/Dashboard/PendingRiders/PendingRiders";
+import MakeAdmin from "../Pages/Dashboard/MakeAdmin/MakeAdmin";
 
 export const router = createBrowserRouter([
     {
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
+            {
+                path: 'make-admin',
+                element: <MakeAdmin></MakeAdmin>
+            },
             {
                 path: 'myParcels',
                 element: <MyParcels></MyParcels>

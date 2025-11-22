@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 import ProShiftLogo from "../../Components/Shared/ProShiftLogo/ProShiftLogo";
 import { RiMenuUnfold2Fill } from "react-icons/ri";
-import { FaHome, FaBox, FaMoneyBillWave, FaSearchLocation, FaUserEdit, FaUserCheck, FaUserClock } from "react-icons/fa";
+import { FaHome, FaBox, FaMoneyBillWave, FaSearchLocation, FaUserEdit, FaUserCheck, FaUserClock, FaUserShield } from "react-icons/fa";
 
 const DashboardLayout = () => {
     return (
@@ -38,7 +38,14 @@ const DashboardLayout = () => {
                             </span>
                         </NavLink>
                     </li>
-
+                    {/* admin panel */}
+                    <li>
+                        <NavLink to="/dashboard/make-admin">
+                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                <FaUserShield /> Manage Admins
+                            </span>
+                        </NavLink>
+                    </li>
                     <li>
                         <NavLink to="/dashboard/myParcels">
                             <span className="flex items-center gap-4 text-gray-700 font-semibold">

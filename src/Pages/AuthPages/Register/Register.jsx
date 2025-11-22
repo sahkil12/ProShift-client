@@ -47,7 +47,6 @@ const Register = () => {
                 }
                 // post user data 
                 const userRes = await axiosPublic.post('/users', userInfo)
-                console.log(userRes.data);
                 if (userRes.data.insertedId) {
                     // update userinfo in the database
                     await updateUserProfile({

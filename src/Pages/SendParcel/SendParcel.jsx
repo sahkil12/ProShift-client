@@ -7,7 +7,7 @@ import useAxiosSecure from "../../Context/Hooks/useAxiosSecure";
 const SendParcel = () => {
 
     const axiosSecure = useAxiosSecure()
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const { user } = useAuth()
     const serviceCenter = useLoaderData()
     const parcelType = watch("type");
@@ -97,6 +97,7 @@ const SendParcel = () => {
                         showConfirmButton: false,
                     });
                 }
+                reset()
             })
     };
 
