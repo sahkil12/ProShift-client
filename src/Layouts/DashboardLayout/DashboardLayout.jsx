@@ -2,8 +2,11 @@ import { NavLink, Outlet } from "react-router";
 import ProShiftLogo from "../../Components/Shared/ProShiftLogo/ProShiftLogo";
 import { RiMenuUnfold2Fill } from "react-icons/ri";
 import { FaHome, FaBox, FaMoneyBillWave, FaSearchLocation, FaUserEdit, FaUserCheck, FaUserClock, FaUserShield } from "react-icons/fa";
+import useUserRole from "../../Context/Hooks/useUserRole";
 
 const DashboardLayout = () => {
+    const { role, isLoading } = useUserRole()
+
     return (
         <div className="drawer xl:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -39,13 +42,32 @@ const DashboardLayout = () => {
                         </NavLink>
                     </li>
                     {/* admin panel */}
-                    <li>
-                        <NavLink to="/dashboard/make-admin">
-                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
-                                <FaUserShield /> Manage Admins
-                            </span>
-                        </NavLink>
-                    </li>
+                    {!isLoading && role === 'admin' &&
+                        <>
+                            <li>
+                                <NavLink to="/dashboard/make-admin">
+                                    <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                        <FaUserShield /> Manage Admins
+                                    </span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/active-riders">
+                                    <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                        <FaUserCheck /> Active Riders
+                                    </span>
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink to="/dashboard/pending-riders">
+                                    <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                        <FaUserClock /> Pending Riders
+                                    </span>
+                                </NavLink>
+                            </li>
+                        </>
+                    }
                     <li>
                         <NavLink to="/dashboard/myParcels">
                             <span className="flex items-center gap-4 text-gray-700 font-semibold">
@@ -77,21 +99,7 @@ const DashboardLayout = () => {
                             </span>
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/active-riders">
-                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
-                                <FaUserCheck /> Active Riders
-                            </span>
-                        </NavLink>
-                    </li>
 
-                    <li>
-                        <NavLink to="/dashboard/pending-riders">
-                            <span className="flex items-center gap-4 text-gray-700 font-semibold">
-                                <FaUserClock /> Pending Riders
-                            </span>
-                        </NavLink>
-                    </li>
                 </ul>
             </div>
         </div>
