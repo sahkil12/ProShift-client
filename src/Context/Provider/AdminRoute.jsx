@@ -11,7 +11,7 @@ const AdminRoute = ({ children }) => {
      }
      // user role check
      if(role !== "admin"){
-          return <Navigate to={'/dashboard'} replace></Navigate>
+          return <Navigate to={'/forbiddenPage'} replace></Navigate>
      }
 
      return children

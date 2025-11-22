@@ -23,7 +23,9 @@ const DashboardLayout = () => {
 
                 </div>
                 {/* Page content here */}
-                <Outlet></Outlet>
+               <div className="min-h-screen">
+                 <Outlet></Outlet>
+               </div>
             </div>
 
             <div className="drawer-side">
