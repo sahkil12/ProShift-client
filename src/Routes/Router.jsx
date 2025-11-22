@@ -18,6 +18,7 @@ import UpdateProfile from "../Pages/Dashboard/UpdateProfile/UpdateProfile";
 import ActiveRiders from "../Pages/Dashboard/ActiveRiders/ActiveRiders";
 import PendingRiders from "../Pages/Dashboard/PendingRiders/PendingRiders";
 import MakeAdmin from "../Pages/Dashboard/MakeAdmin/MakeAdmin";
+import AdminRoute from "../Context/Provider/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -69,7 +70,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: 'make-admin',
-                element: <MakeAdmin></MakeAdmin>
+                element: <AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>
             },
             {
                 path: 'myParcels',
@@ -93,11 +94,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'active-riders',
-                element: <ActiveRiders></ActiveRiders>
+                element: <AdminRoute><ActiveRiders></ActiveRiders></AdminRoute>
             },
             {
                 path: 'pending-riders',
-                element: <PendingRiders></PendingRiders>
+                element: <AdminRoute><PendingRiders></PendingRiders></AdminRoute>
             }
         ]
     }
