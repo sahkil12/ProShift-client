@@ -13,7 +13,7 @@ const PendingRiders = () => {
      const { data: riders = [], isPending, refetch } = useQuery({
           queryKey: ['pendingRiders'],
           queryFn: async () => {
-               const res = await axiosPublic.get('/riders/pending')
+               const res = await axiosSecure.get('/riders/pending')
                return res.data
           }
      })

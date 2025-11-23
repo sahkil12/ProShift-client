@@ -17,7 +17,7 @@ const ActiveRiders = () => {
      const { data: riders = [], isLoading, refetch } = useQuery({
           queryKey: ["activeRiders", finalSearch],
           queryFn: async () => {
-               const res = await axiosPublic.get(`/riders/active?search=${finalSearch}`);
+               const res = await axiosSecure.get(`/riders/active?search=${finalSearch}`);
                return res.data;
           },
      });
