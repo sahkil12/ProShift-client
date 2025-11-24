@@ -90,7 +90,7 @@ const MyParcels = () => {
                                 <th>{index + 1}</th>
                                 <td>{parcel.type === "document" ? " Document" : " Non-Document"}</td>
                                 <td title={parcel.title} className="mx-w-[150px] truncate">{parcel.title}</td>
-                                <td>{new Date(parcel.creation_date).toLocaleString()}</td>
+                                <td>{new Date(parcel.creation_at).toLocaleString()}</td>
                                 <td className="font-bold text-base">{parcel.totalCost}</td>
                                 <td>
                                     <span

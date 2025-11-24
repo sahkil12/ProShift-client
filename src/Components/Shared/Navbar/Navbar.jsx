@@ -20,7 +20,6 @@ const Navbar = () => {
             </>
         }
         <li><NavLink> About Us </NavLink></li>
-        <li><NavLink> Pricing </NavLink></li>
         {user ? <li><NavLink className={'md:hidden flex'} to={'/be_a_rider'}> Be a Rider </NavLink></li>
             : 
         <li><NavLink to={'/be_a_rider'}> Be a Rider </NavLink></li>}

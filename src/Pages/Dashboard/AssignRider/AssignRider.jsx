@@ -1,26 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaMotorcycle } from "react-icons/fa";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
-import useAuth from "../../../Context/Hooks/useAuth";
+// import useAuth from "../../../Context/Hooks/useAuth";
 import Loader from "../../../Components/Shared/Loader/Loader";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
 const AssignRider = () => {
      const axiosSecure = useAxiosSecure();
-     const { user } = useAuth();
+     // const { user } = useAuth();
      const queryClient = useQueryClient();
      const [selectedParcel, setSelectedParcel] = useState(null);
      const [selectedRider, setSelectedRider] = useState("");
-
-     // Load parcels
+     // Load parcels based on paid and not_collected parcels
      const { data: parcels = [], isLoading, error } = useQuery({
           queryKey: ["assign-rider-parcels"],
           queryFn: async () => {
                const res = await axiosSecure.get(
                     `/parcels?payment_status=paid&delivery_status=not_collected`
                );
-               // const filtered
                return res.data;
           },
      });
@@ -40,8 +38,8 @@ const AssignRider = () => {
 
      // Assign rider mutation
      const assignRiderMutation = useMutation({
-          mutationFn: async ({ parcelId, riderId }) => {
-               return axiosSecure.patch(`/parcels/assign-rider/${parcelId}`, { riderId });
+          mutationFn: async ({ parcelId, riderId, riderEmail }) => {
+               return axiosSecure.patch(`/parcels/assign-rider/${parcelId}`, { riderId, riderEmail });
           },
           onSuccess: () => {
                Swal.fire("Success", "Rider assigned successfully!", "success");
@@ -79,17 +77,17 @@ const AssignRider = () => {
                               {parcels.map((parcel, index) => (
                                    <tr key={parcel._id} className="hover:bg-gray-200">
                                         <td>{index + 1}</td>
-
+                                        {/* sender details */}
                                         <td>
-                                             <p className="font-medium">{parcel.senderName}</p>
+                                             <p className="font-semibold">{parcel.senderName}</p>
                                              <p className="text-sm text-gray-500">{parcel.senderRegion}</p>
                                         </td>
-
+                                        {/* receiver details */}
                                         <td>
-                                             <p className="font-medium">{parcel.receiverName}</p>
+                                             <p className="font-semibold">{parcel.receiverName}</p>
                                              <p className="text-sm text-gray-500">{parcel.receiverRegion}</p>
                                         </td>
-
+                                        {/*  */}
                                         <td>
                                              <span
                                                   className={`font-bold ${parcel.type === "document"
@@ -100,11 +98,11 @@ const AssignRider = () => {
                                                   {parcel.type === "document" ? "Document" : "Non-Document"}
                                              </span>
                                         </td>
-
+                                        {/* cost */}
                                         <td className="font-bold">{parcel.totalCost}</td>
-
+                                        {/* date */}
                                         <td>{new Date(parcel.creation_at).toLocaleString()}</td>
-
+                                        {/* assign button */}
                                         <td>
                                              <button
                                                   className="flex items-center gap-2 btn btn-primary text-black/80"
@@ -126,14 +124,14 @@ const AssignRider = () => {
                          </tbody>
                     </table>
                </div>
-               {/* DaisyUI MODAL */}
+               {/* assign rider modal */}
                {selectedParcel && (
                     <dialog id="assignModal" className="modal modal-open">
                          <div className="modal-box w-11/12 max-w-2xl">
                               <h3 className="text-2xl font-bold mb-3">
                                    Assign Rider for <span className="text-teal-700">{selectedParcel.title}</span>
                               </h3>
-
+                              {/*  */}
                               <p className="text-gray-600 mb-4">
                                    Pickup Center: <b>{selectedParcel.senderRegion}</b>
                               </p>
@@ -147,24 +145,26 @@ const AssignRider = () => {
                                         </p>
                                    ) : (
                                         <table className="table">
-                                             <thead className="font-bold bg-gray-200">
+                                             <thead className="font-bold bg-gray-300 text-base">
                                                   <tr>
                                                        <th>Name</th>
+                                                       <th>Phone</th>
                                                        <th>Action</th>
                                                   </tr>
                                              </thead>
                                              <tbody>
                                                   {riders?.map((rider) => (
-                                                       <tr key={rider._id}>
+                                                       <tr className="hover:bg-gray-100" key={rider._id}>
                                                             <td>{rider.name}</td>
+                                                            <td>{rider.phone}</td>
                                                             <td>
                                                                  <button
                                                                       disabled={rider.work_status === "assigned"}
-                                                                      className={`btn btn-sm ${selectedRider === rider._id
+                                                                      className={`btn btn-sm ${selectedRider._id === rider._id
                                                                            ? "btn-success text-black/80"
                                                                            : "btn-outline"
                                                                            }`}
-                                                                      onClick={() => setSelectedRider(rider._id)}
+                                                                      onClick={() => setSelectedRider(rider)}
                                                                  >
                                                                       Select
                                                                  </button>
@@ -175,7 +175,6 @@ const AssignRider = () => {
                                         </table>
                                    )}
                               </div>
-
                               <div className="modal-action">
                                    <button
                                         className="btn"
@@ -193,7 +192,8 @@ const AssignRider = () => {
                                         onClick={() =>
                                              assignRiderMutation.mutate({
                                                   parcelId: selectedParcel._id,
-                                                  riderId: selectedRider,
+                                                  riderId: selectedRider._id,
+                                                  riderEmail: selectedRider.email
                                              })
                                         }
                                    >

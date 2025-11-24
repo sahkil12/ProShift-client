@@ -21,6 +21,8 @@ import MakeAdmin from "../Pages/Dashboard/MakeAdmin/MakeAdmin";
 import AdminRoute from "../Context/Provider/AdminRoute";
 import ForbiddenPage from "../Pages/Dashboard/ForbiddenPage/ForbiddenPage";
 import AssignRider from "../Pages/Dashboard/AssignRider/AssignRider";
+import RiderRoute from "../Context/Provider/RiderRoute";
+import PendingDeliveries from "../Pages/Dashboard/PendingDeliveries/PendingDeliveries";
 
 export const router = createBrowserRouter([
     {
@@ -98,6 +100,12 @@ export const router = createBrowserRouter([
                 path: 'update-profile',
                 element: <UpdateProfile></UpdateProfile>
             },
+            // rider route
+            {
+                path: 'pending-deliveries',
+                element: <RiderRoute><PendingDeliveries></PendingDeliveries></RiderRoute>
+            },
+            // admin route
             {
                 path: 'active-riders',
                 element: <AdminRoute><ActiveRiders></ActiveRiders></AdminRoute>
