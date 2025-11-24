@@ -3,6 +3,7 @@ import ProShiftLogo from "../../Components/Shared/ProShiftLogo/ProShiftLogo";
 import { RiMenuUnfold2Fill } from "react-icons/ri";
 import { FaHome, FaBox, FaMoneyBillWave, FaSearchLocation, FaUserEdit, FaUserCheck, FaUserClock, FaUserShield } from "react-icons/fa";
 import useUserRole from "../../Context/Hooks/useUserRole";
+import { FaMotorcycle } from "react-icons/fa6";
 
 const DashboardLayout = () => {
     const { role, isLoading } = useUserRole()
@@ -23,9 +24,9 @@ const DashboardLayout = () => {
 
                 </div>
                 {/* Page content here */}
-               <div className="min-h-screen">
-                 <Outlet></Outlet>
-               </div>
+                <div className="min-h-screen">
+                    <Outlet></Outlet>
+                </div>
             </div>
 
             <div className="drawer-side">
@@ -65,6 +66,14 @@ const DashboardLayout = () => {
                                 <NavLink to="/dashboard/pending-riders">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaUserClock /> Pending Riders
+                                    </span>
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink to="/dashboard/assign-rider">
+                                    <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                        <FaMotorcycle /> Assign Rider
                                     </span>
                                 </NavLink>
                             </li>
