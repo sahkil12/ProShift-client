@@ -157,6 +157,7 @@ const AssignRider = () => {
                                                        <tr className="hover:bg-gray-100" key={rider._id}>
                                                             <td>{rider.name}</td>
                                                             <td>{rider.phone}</td>
+                                                           
                                                             <td>
                                                                  <button
                                                                       disabled={rider.work_status === "assigned"}
@@ -166,7 +167,7 @@ const AssignRider = () => {
                                                                            }`}
                                                                       onClick={() => setSelectedRider(rider)}
                                                                  >
-                                                                      Select
+                                                                      {rider.work_status === "assigned" ? 'Assigned': 'Select'}
                                                                  </button>
                                                             </td>
                                                        </tr>
