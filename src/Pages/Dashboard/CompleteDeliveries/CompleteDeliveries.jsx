@@ -49,7 +49,9 @@ const CompleteDeliveries = () => {
                     : parcel.totalCost * 0.4
           );
      };
-     const totalEarnings = completed.reduce((sum, p) => sum + calculateEarning(p), 0);
+     const totalEarnings = completed
+          .filter(p => p.cashout_status !== "cashed_out")
+          .reduce((sum, p) => sum + calculateEarning(p), 0);
 
      if (isPending) return <Loader></Loader>
      return (
@@ -112,7 +114,7 @@ const CompleteDeliveries = () => {
                                              )}
 
                                              {parcel.cashout_status === "cashed_out" && (
-                                                  <span className="px-3 py-1 bg-green-600 text-white rounded">
+                                                  <span className="px-3 py-2 bg-green-600 font-medium text-white rounded">
                                                        Cashed Out
                                                   </span>
                                              )}

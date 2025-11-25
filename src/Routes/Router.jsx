@@ -24,6 +24,7 @@ import AssignRider from "../Pages/Dashboard/AssignRider/AssignRider";
 import RiderRoute from "../Context/Provider/RiderRoute";
 import PendingDeliveries from "../Pages/Dashboard/PendingDeliveries/PendingDeliveries";
 import CompleteDeliveries from "../Pages/Dashboard/CompleteDeliveries/CompleteDeliveries";
+import CashoutRequests from "../Pages/Dashboard/Cashout Requests/CashoutRequests";
 
 export const router = createBrowserRouter([
     {
@@ -122,6 +123,10 @@ export const router = createBrowserRouter([
             {
                 path: "assign-rider",
                 element: <AdminRoute><AssignRider></AssignRider></AdminRoute>
+            },
+            {
+                path: 'cashout-requests',
+                element: <AdminRoute> <CashoutRequests></CashoutRequests> </AdminRoute>
             }
 
         ]
