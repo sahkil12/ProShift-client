@@ -13,7 +13,7 @@ const RiderRoute = ({ children }) => {
           return <Navigate to={'/forbiddenPage'} replace></Navigate>
      }
 
-     return children
+     return children     
 };
 
 export default RiderRoute;
