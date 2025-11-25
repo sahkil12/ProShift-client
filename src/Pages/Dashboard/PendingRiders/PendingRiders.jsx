@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import Swal from "sweetalert2";
-import useAxios from "../../../Context/Hooks/useAxios";
+// import useAxios from "../../../Context/Hooks/useAxios";
 import Loader from "../../../Components/Shared/Loader/Loader";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 
 const PendingRiders = () => {
-     const axiosPublic = useAxios()
+     // const axiosPublic = useAxios()
      const axiosSecure = useAxiosSecure()
      const [selectedRider, setSelectedRider] = useState(null);
      const { data: riders = [], isPending, refetch } = useQuery({
@@ -53,7 +53,6 @@ const PendingRiders = () => {
      };
 
      if (isPending) return <Loader></Loader>
-
      return (
           <div className="">
                <h2 className="p-4 text-4xl md:text-5xl font-bold text-teal-950 my-3">Pending Riders</h2>
@@ -109,10 +108,8 @@ const PendingRiders = () => {
                                    </tr>
                               ))}
                          </tbody>
-
                     </table>
                </div>
-
                {/* Rider Details Modal */}
                {selectedRider && (
                     <dialog open className="modal">
@@ -132,7 +129,6 @@ const PendingRiders = () => {
                                    <p><strong>More Info:</strong> {selectedRider.information}</p>
                                    <p><strong>Applied At:</strong> {new Date(selectedRider.created_at).toLocaleString()}</p>
                               </div>
-
                               <div className="modal-action">
                                    <button className="btn w-full mt-6 font-bold bg-primary" onClick={() => setSelectedRider(null)}>
                                         Close
