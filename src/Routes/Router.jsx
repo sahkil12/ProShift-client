@@ -25,6 +25,7 @@ import RiderRoute from "../Context/Provider/RiderRoute";
 import PendingDeliveries from "../Pages/Dashboard/PendingDeliveries/PendingDeliveries";
 import CompleteDeliveries from "../Pages/Dashboard/CompleteDeliveries/CompleteDeliveries";
 import CashoutRequests from "../Pages/Dashboard/Cashout Requests/CashoutRequests";
+import MyEarnings from "../Pages/Dashboard/MyEarnings/MyEarnings";
 
 export const router = createBrowserRouter([
     {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
             {
                 path: 'complete-deliveries',
                 element: <RiderRoute> <CompleteDeliveries></CompleteDeliveries> </RiderRoute>
+            },
+            {
+                path: 'my-earnings',
+                element: <RiderRoute><MyEarnings></MyEarnings></RiderRoute>
             },
             // admin route
             {

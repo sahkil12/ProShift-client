@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Context/Hooks/useAuth";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
@@ -14,6 +14,7 @@ const SendParcel = () => {
     const senderRegion = watch("senderRegion");
     const receiverRegion = watch("receiverRegion");
     const uniqueRegions = [...new Set(serviceCenter?.map(item => item.region))];
+    const navigate = useNavigate()
 
     const onSubmit = (data) => {
         let cost = 0;
@@ -96,6 +97,7 @@ const SendParcel = () => {
                         timer: 2000,
                         showConfirmButton: false,
                     });
+                    navigate('/dashboard/myParcels')
                 }
                 reset()
             })

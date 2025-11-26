@@ -2,6 +2,7 @@ import { NavLink, Outlet } from "react-router";
 import ProShiftLogo from "../../Components/Shared/ProShiftLogo/ProShiftLogo";
 import { RiMenuUnfold2Fill } from "react-icons/ri";
 import { FaHome, FaBox, FaMoneyBillWave, FaSearchLocation, FaUserEdit, FaUserCheck, FaUserClock, FaUserShield, FaTasks, FaCheckCircle, FaWallet } from "react-icons/fa";
+import { GiWallet } from "react-icons/gi";
 import useUserRole from "../../Context/Hooks/useUserRole";
 import { FaMotorcycle } from "react-icons/fa6";
 
@@ -58,6 +59,13 @@ const DashboardLayout = () => {
                                 <NavLink to="/dashboard/complete-deliveries">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaCheckCircle /> Complete Deliveries
+                                    </span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/my-earnings">
+                                    <span className="flex items-center gap-4 text-gray-700 font-semibold">
+                                       <GiWallet></GiWallet> My Earnings 
                                     </span>
                                 </NavLink>
                             </li>

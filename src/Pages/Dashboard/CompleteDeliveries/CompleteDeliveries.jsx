@@ -86,7 +86,7 @@ const CompleteDeliveries = () => {
                               {completed.map((parcel, index) => (
                                    <tr key={parcel._id} className="hover:bg-gray-200">
                                         <td>{index + 1}</td>
-                                        <td title={parcel.trackingId}>{(parcel.trackingId).slice(0, 20)}.....</td>
+                                        <td title={parcel.trackingId}>{(parcel.trackingId).slice(0, 15)}.....</td>
                                         <td>{parcel.title}</td>
                                         <td title={parcel.receiverAddress}>{parcel.receiverName}</td>
                                         <td>{parcel.receiverCenter}</td>
@@ -114,7 +114,7 @@ const CompleteDeliveries = () => {
                                              )}
 
                                              {parcel.cashout_status === "cashed_out" && (
-                                                  <span className="px-3 py-2 bg-green-600 font-medium text-white rounded">
+                                                  <span className="py-4 font-semibold badge badge-success text-xs md:text-sm">
                                                        Cashed Out
                                                   </span>
                                              )}
