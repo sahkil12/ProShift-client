@@ -6,6 +6,7 @@ import Loader from "../../../Components/Shared/Loader/Loader";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import useAuth from "../../../Context/Hooks/useAuth";
 import Swal from "sweetalert2";
+import useTrackingUpdate from "../../../Context/Hooks/useTrackingUpdate";
 
 const PaymentForm = () => {
     const { id: parcelId } = useParams()
@@ -15,6 +16,7 @@ const PaymentForm = () => {
     const elements = useElements()
     const [error, setError] = useState('')
     const axiosSecure = useAxiosSecure()
+    const { mutate: updateTracking } = useTrackingUpdate()
 
     const { data: parcelData = [], isPending } = useQuery({
         queryKey: ['parcels', parcelId],
@@ -23,9 +25,9 @@ const PaymentForm = () => {
             return res.data
         }
     })
-
     if (isPending) return <Loader></Loader>
     const price = parcelData.totalCost
+    const trackingId = parcelData.trackingId
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -50,7 +52,6 @@ const PaymentForm = () => {
         const res = await axiosSecure.post(`/create-payment-intent`, { amount: price, parcelId: parcelId })
 
         const clientSecret = res.data.clientSecret;
-
         const result = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
@@ -71,17 +72,19 @@ const PaymentForm = () => {
                 amount: price,
                 paymentId: result.paymentIntent.id,
                 userEmail: user?.email,
-                transactionId: parcelData.trackingId,
+                transactionId: trackingId,
                 payment_method: result.paymentIntent.payment_method_types,
             }
             const paymentsRes = await axiosSecure.post(`/payments`, paymentData)
             if (paymentsRes.data.paymentResult) {
                 Swal.fire({
                     title: "Payment Successful ",
-                    html: `<p>Transaction ID : <b>${parcelData.trackingId}</b></p>`,
+                    html: `<p>Transaction ID : <b>${trackingId}</b></p>`,
                     icon: "success",
                     confirmButtonText: "Go to My Parcels"
                 }).then(() => {
+                    // update tracking data
+                    updateTracking({ trackingId, status: "paid" })
                     // Redirect to My Parcels page
                     navigate("/dashboard/myParcels");
                 });

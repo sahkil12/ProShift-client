@@ -88,8 +88,22 @@ const SendParcel = () => {
         };
         // post parcel data in database
         axiosSecure.post('/parcels', parcelData)
-            .then(res => {
+            .then(async (res) => {
+                const parcelId = res.data.insertedId;
                 if (res.data.insertedId) {
+                    const trackingData = {
+                        parcelId,
+                        trackingId,
+                        currentStatus: "submitted",
+                        history: [
+                            {
+                                status: "submitted",
+                                timestamp: new Date().toISOString()
+                            }
+                        ]
+                    }
+                    await axiosSecure.post("/tracking", trackingData);
+
                     Swal.fire({
                         icon: "success",
                         title: "Parcel Confirmed!",

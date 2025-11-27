@@ -18,7 +18,6 @@ const CashoutRequests = () => {
      const approveMutation = useMutation({
           mutationFn: async (id) => {
                const res = await axiosSecure.patch(`/admin/cashout/approve/${id}`);
-               console.log(res.data);
                return res.data;
           },
           onSuccess: () => {

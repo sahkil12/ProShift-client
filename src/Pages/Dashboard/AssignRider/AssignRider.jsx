@@ -5,11 +5,13 @@ import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import Loader from "../../../Components/Shared/Loader/Loader";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import useTrackingUpdate from "../../../Context/Hooks/useTrackingUpdate";
 
 const AssignRider = () => {
      const axiosSecure = useAxiosSecure();
      // const { user } = useAuth();
      const queryClient = useQueryClient();
+     const {mutate: updateTracking} = useTrackingUpdate()
      const [selectedParcel, setSelectedParcel] = useState(null);
      const [selectedRider, setSelectedRider] = useState("");
      // Load parcels based on paid and not_collected parcels
@@ -22,7 +24,8 @@ const AssignRider = () => {
                return res.data;
           },
      });
-
+     // trackingId
+     const trackingId = selectedParcel?.trackingId
      // Load riders by district
      const { data: riders = [], isLoading: ridersLoading } = useQuery({
           queryKey: ["riders", selectedParcel?.senderRegion],
@@ -44,6 +47,8 @@ const AssignRider = () => {
           onSuccess: () => {
                Swal.fire("Success", "Rider assigned successfully!", "success");
                queryClient.invalidateQueries(["assign-rider-parcels"]);
+               // update tracking data
+               updateTracking({trackingId, status: "rider-assigned"})
                setSelectedParcel(null);
                setSelectedRider("");
           },

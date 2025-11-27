@@ -14,8 +14,6 @@ const CompleteDeliveries = () => {
           },
           staleTime: 60000,
      });
-     console.log(completed);
-
      // mutation for cashout request
      const cashoutMutation = useMutation({
           mutationFn: async (parcelId) => {

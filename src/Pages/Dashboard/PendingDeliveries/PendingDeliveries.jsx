@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import Loader from "../../../Components/Shared/Loader/Loader";
 import Swal from "sweetalert2";
+import useTrackingUpdate from "../../../Context/Hooks/useTrackingUpdate";
 
 const PendingDeliveries = () => {
      const axiosSecure = useAxiosSecure();
-
+     const { mutate: updateTracking } = useTrackingUpdate()
      const { data: parcels = [], isLoading, refetch } = useQuery({
           queryKey: ["pending-deliveries"],
           queryFn: async () => {
@@ -14,7 +15,8 @@ const PendingDeliveries = () => {
           },
           staleTime: 60000,
      })
-     const handlePicked = async (id) => {
+
+     const handlePicked = async (parcel) => {
           const result = await Swal.fire({
                title: "Mark as Picked?",
                text: "Confirm that you picked up this parcel.",
@@ -23,15 +25,17 @@ const PendingDeliveries = () => {
                confirmButtonText: "Yes, Picked Up"
           });
           if (!result.isConfirmed) return;
-
-          const res = await axiosSecure.patch(`/parcels/mark-picked/${id}`)
+          const trackingId = parcel?.trackingId
+          const res = await axiosSecure.patch(`/parcels/mark-picked/${parcel._id}`)
           if (res.data.result?.modifiedCount > 0) {
+               // update tracking data
+               updateTracking({ trackingId, status: "picked_up" })
                refetch();
                Swal.fire("Success!", "Parcel marked as picked up.", "success");
           }
      }
-
-     const handleDelivered = async (id) => {
+     // handle delivered
+     const handleDelivered = async (parcel) => {
           const result = await Swal.fire({
                title: "Mark as Delivered?",
                text: "Confirm that you delivered this parcel.",
@@ -40,16 +44,17 @@ const PendingDeliveries = () => {
                confirmButtonText: "Yes, Delivered"
           });
           if (!result.isConfirmed) return;
-
-          const res = await axiosSecure.patch(`/parcels/mark-delivered/${id}`);
+          const trackingId = parcel?.trackingId
+          const res = await axiosSecure.patch(`/parcels/mark-delivered/${parcel._id}`);
           if (res.data.result?.modifiedCount > 0) {
+               // update tracking data
+               updateTracking({ trackingId, status: "delivered" })
                refetch();
                Swal.fire("Success!", "Parcel delivered successfully.", "success");
           }
      }
 
      if (isLoading) return <Loader></Loader>
-
      return (
           <div className="">
                <h2 className="p-4 text-4xl md:text-5xl font-bold text-teal-950 my-3">
@@ -102,7 +107,7 @@ const PendingDeliveries = () => {
                                                   {parcel.delivery_status === "rider-assigned" && (
                                                        <button
                                                             className="btn btn-md text-black/90 btn-success"
-                                                            onClick={() => handlePicked(parcel._id)}
+                                                            onClick={() => handlePicked(parcel)}
                                                        >
                                                             Picked
                                                        </button>
@@ -111,7 +116,7 @@ const PendingDeliveries = () => {
                                                   {parcel.delivery_status === "in-transit" && (
                                                        <button
                                                             className="btn btn-md btn-primary text-black/90"
-                                                            onClick={() => handleDelivered(parcel._id)}
+                                                            onClick={() => handleDelivered(parcel)}
                                                        >
                                                             Delivered
                                                        </button>

@@ -69,7 +69,7 @@ const MyEarnings = () => {
                     <h3 className="text-lg md:text-2xl mb-4 font-bold text-black/80">Total Cashed Out</h3>
                     <p className="text-2xl font-bold text-sky-600">৳{totalCashedOut.toFixed(2)}</p>
                 </div>
-                <div className="bg-gray-100 p-5 hover:shadow-md rounded shadow border-t-10 rounded-t-md border-gray-500">
+                <div className="bg-primary/30 p-5 hover:shadow-md rounded shadow border-t-10 rounded-t-md border-primary">
                     <h3 className="text-lg md:text-2xl mb-4 font-bold text-black/80">Total Delivered</h3>
                     <p className="text-2xl font-bold text-orange-700">{totalDelivered}</p>
                 </div>
