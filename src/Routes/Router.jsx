@@ -26,6 +26,7 @@ import PendingDeliveries from "../Pages/Dashboard/PendingDeliveries/PendingDeliv
 import CompleteDeliveries from "../Pages/Dashboard/CompleteDeliveries/CompleteDeliveries";
 import CashoutRequests from "../Pages/Dashboard/Cashout Requests/CashoutRequests";
 import MyEarnings from "../Pages/Dashboard/MyEarnings/MyEarnings";
+import TrackingParcel from "../Pages/Dashboard/TrackingParcel/TrackingParcel";
 
 export const router = createBrowserRouter([
     {
@@ -102,6 +103,10 @@ export const router = createBrowserRouter([
             {
                 path: 'update-profile',
                 element: <UpdateProfile></UpdateProfile>
+            },
+            {
+                path: "trackingParcel/:trackingId",
+                element: <TrackingParcel></TrackingParcel>
             },
             // rider route
             {

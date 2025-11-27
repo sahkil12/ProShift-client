@@ -18,7 +18,6 @@ const CompleteDeliveries = () => {
      const cashoutMutation = useMutation({
           mutationFn: async (parcelId) => {
                const res = await axiosSecure.patch(`/parcels/cashout/${parcelId}`)
-               // console.log(res.data);
                return res.data;
           },
           onSuccess: () => {

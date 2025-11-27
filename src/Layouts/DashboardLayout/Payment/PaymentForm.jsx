@@ -15,6 +15,7 @@ const PaymentForm = () => {
     const stripe = useStripe()
     const elements = useElements()
     const [error, setError] = useState('')
+    const [processing, setProcessing] = useState(false);
     const axiosSecure = useAxiosSecure()
     const { mutate: updateTracking } = useTrackingUpdate()
 
@@ -32,6 +33,8 @@ const PaymentForm = () => {
         e.preventDefault()
 
         if (!stripe || !elements) return;
+        if (processing) return
+        setProcessing(true);
 
         const card = elements.getElement(CardElement);
         if (!card) {
@@ -43,6 +46,7 @@ const PaymentForm = () => {
         })
         if (error) {
             setError(error.message);
+               setProcessing(false);
             return;
         } else {
             if (paymentMethod) {
@@ -63,6 +67,7 @@ const PaymentForm = () => {
         });
         if (result.error) {
             setError(result.error.message);
+            setProcessing(false);
         } else {
             setError('')
         }
@@ -111,8 +116,9 @@ const PaymentForm = () => {
                     }}
                     className="border p-4 rounded text-black" />
                 {error && <p className="font-medium text-red-400 ">{error}</p>}
-                <button className="btn font-bold text-base w-full text-black px-10 btn-primary mt-4" disabled={!stripe}>
-                    Pay {price}
+                <button
+                    className="btn font-bold text-base w-full text-black px-10 btn-primary mt-4" disabled={!stripe || processing}>
+                   {processing ? "Processing..." : `Pay ${price}`}
                 </button>
             </form>
         </div>

@@ -94,6 +94,7 @@ const SendParcel = () => {
                     const trackingData = {
                         parcelId,
                         trackingId,
+                        userEmail: user?.email,
                         currentStatus: "submitted",
                         history: [
                             {

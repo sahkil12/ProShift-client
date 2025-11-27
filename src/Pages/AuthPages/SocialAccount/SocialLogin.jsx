@@ -12,7 +12,6 @@ const SocialLogin = ({ methodName, from }) => {
         googleCreate()
             .then(async (res) => {
                 const user = res.user
-                console.log(user);
                 if (res) {
                     const userInfo = {
                         name: user.displayName,
@@ -23,7 +22,6 @@ const SocialLogin = ({ methodName, from }) => {
                         last_login: new Date().toISOString()
                     }
                     const res = await axiosPublic.post('/users', userInfo)
-                    console.log(res.data);
                     if (res.data) {
                         navigate(from || '/')
                     }
