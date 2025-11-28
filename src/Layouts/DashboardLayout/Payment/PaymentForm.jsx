@@ -27,6 +27,7 @@ const PaymentForm = () => {
         }
     })
     if (isPending) return <Loader></Loader>
+
     const price = parcelData.totalCost
     const trackingId = parcelData.trackingId
     const handleSubmit = async (e) => {
@@ -46,7 +47,7 @@ const PaymentForm = () => {
         })
         if (error) {
             setError(error.message);
-               setProcessing(false);
+            setProcessing(false);
             return;
         } else {
             if (paymentMethod) {
@@ -82,14 +83,14 @@ const PaymentForm = () => {
             }
             const paymentsRes = await axiosSecure.post(`/payments`, paymentData)
             if (paymentsRes.data.paymentResult) {
+                // update tracking data
+                updateTracking({ trackingId, status: "paid" })
                 Swal.fire({
                     title: "Payment Successful ",
                     html: `<p>Transaction ID : <b>${trackingId}</b></p>`,
                     icon: "success",
                     confirmButtonText: "Go to My Parcels"
                 }).then(() => {
-                    // update tracking data
-                    updateTracking({ trackingId, status: "paid" })
                     // Redirect to My Parcels page
                     navigate("/dashboard/myParcels");
                 });
@@ -117,8 +118,9 @@ const PaymentForm = () => {
                     className="border p-4 rounded text-black" />
                 {error && <p className="font-medium text-red-400 ">{error}</p>}
                 <button
-                    className="btn font-bold text-base w-full text-black px-10 btn-primary mt-4" disabled={!stripe || processing}>
-                   {processing ? "Processing..." : `Pay ${price}`}
+                    className="btn font-bold text-base w-full text-black px-10 btn-primary mt-4"
+                    disabled={!stripe || processing}>
+                    {processing ? "Processing..." : `Pay ${price}`}
                 </button>
             </form>
         </div>

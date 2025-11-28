@@ -27,6 +27,7 @@ import CompleteDeliveries from "../Pages/Dashboard/CompleteDeliveries/CompleteDe
 import CashoutRequests from "../Pages/Dashboard/Cashout Requests/CashoutRequests";
 import MyEarnings from "../Pages/Dashboard/MyEarnings/MyEarnings";
 import TrackingParcel from "../Pages/Dashboard/TrackingParcel/TrackingParcel";
+import DashBoardHome from "../Pages/Dashboard/DashBoardHome/DashBoardHome";
 
 export const router = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
+            {
+                index: true,
+                element: <DashBoardHome></DashBoardHome>
+            },
             {
                 path: 'make-admin',
                 element: <AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>

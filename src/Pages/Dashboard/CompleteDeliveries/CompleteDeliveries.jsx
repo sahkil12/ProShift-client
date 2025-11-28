@@ -100,7 +100,7 @@ const CompleteDeliveries = () => {
                                                        className="btn btn-sm btn-primary text-black"
                                                        onClick={() => handleCashout(parcel._id)}
                                                   >
-                                                       Cash Out
+                                                       {cashoutMutation.isPending ? <span className="loading m-3 loading-sm loading-spinner text-success"></span> : " Cash Out"}
                                                   </button>
                                              )}
 

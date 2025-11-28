@@ -20,15 +20,14 @@ const Navbar = () => {
             </>
         }
         <li><NavLink> About Us </NavLink></li>
-        {user ? <li><NavLink className={'md:hidden flex'} to={'/be_a_rider'}> Be a Rider </NavLink></li>
-            : 
-        <li><NavLink to={'/be_a_rider'}> Be a Rider </NavLink></li>}
+        {user ? <li><NavLink className={({ isActive }) => `${isActive ? `${activeClasses}` : ''} md:hidden flex`} to={'/be_a_rider'}> Be a Rider </NavLink></li>
+            :
+            <li><NavLink to={'/be_a_rider'}> Be a Rider </NavLink></li>}
     </>
     // gsap style 
     const logoRef = useRef()
     const navRef = useRef()
     const navEndRef = useRef()
-
     useGSAP(() => {
         gsap.from(logoRef.current, {
             y: -40,
@@ -74,13 +73,13 @@ const Navbar = () => {
                 <div className="flex items-center gap-4">
                     {/* bea a rider button */}
                     {
-                        user && <div onClick={()=> {navigate('/be_a_rider')}} className="hidden cursor-pointer md:flex w-fit mx-auto items-center">
+                        user && <div onClick={() => { navigate('/be_a_rider') }} className="hidden cursor-pointer md:flex w-fit mx-auto items-center">
                             <button className="py-2.5 px-7 font-bold text-lg rounded-xl cursor-pointer bg-primary">Be a rider</button>
                             <span className="p-1.5 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
                         </div>
                     }
                     {
-                        user ? <details className="dropdown dropdown-end">
+                        user? <details className="dropdown dropdown-end">
                             <summary className="border-2 p-0.5 rounded-full border-gray-400 cursor-pointer list-none hover:scale-105">
                                 <img src={user?.photoURL} className="w-9 h-9 md:w-10 md:h-10 rounded-full object-cover" alt="" />
                             </summary>

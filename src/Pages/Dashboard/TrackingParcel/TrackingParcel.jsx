@@ -49,24 +49,24 @@ const TrackingParcel = () => {
           );
      }
      return (
-          <div className="p-6">
+          <div className="p-2 md:p-6">
                <h2 className="text-4xl md:text-5xl font-bold text-teal-900 mb-8">Parcel Tracking</h2>
 
                {/* Top summary */}
                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <div className="bg-primary/40 p-4 rounded shadow border">
+                    <div className="bg-primary/60 p-4 rounded shadow border">
                          <div className="text-md mb-3 font-semibold text-gray-700">Tracking ID</div>
                          <div className="font-mono font-bold my-2">{tracking?.trackingId}</div>
                          <div className="text-sm font-medium text-gray-700 mt-1">{tracking?.currentStatus}</div>
                     </div>
 
-                    <div className="bg-primary/40 p-4 rounded shadow border">
+                    <div className="bg-primary/60 p-4 rounded shadow border">
                          <div className="text-md mb-3 font-semibold text-gray-700">Parcel</div>
                          <div className="font-bold my-2">{parcel?.title || "—"}</div>
                          <div className="text-sm font-medium text-gray-700 mt-1">Fee: ৳{parcel?.totalCost ?? "—"}</div>
                     </div>
 
-                    <div className="bg-primary/40 p-4 rounded shadow border">
+                    <div className="bg-primary/60 p-4 rounded shadow border">
                          <div className="text-md mb-3 font-semibold text-gray-700">Route</div>
                          <div className="font-bold my-2">{parcel?.senderCenter} → {parcel?.receiverCenter}</div>
                          <div className="text-sm font-medium text-gray-700 mt-1">Created: {parcel?.creation_at ? format(parseISO(parcel.creation_at), "PP p") : "—"}</div>
@@ -74,7 +74,7 @@ const TrackingParcel = () => {
                </div>
 
                {/* Timeline */}
-               <div className="bg-white p-6 rounded shadow border">
+               <div className="bg-white p-3 md:p-6 rounded shadow border">
                     <h3 className="text-2xl font-semibold mb-6">Progress</h3>
 
                     <div className="space-y-6">
@@ -82,7 +82,7 @@ const TrackingParcel = () => {
                               const found = findStep(step.key);
                               const completed = !!found;
                               return (
-                                   <div key={step.key} className="flex items-start gap-6">
+                                   <div key={step.key} className="flex items-start gap-4 md:gap-6">
                                         {/* icon & line */}
                                         <div className="flex flex-col items-center">
                                              {completed ? (
@@ -99,13 +99,13 @@ const TrackingParcel = () => {
                                         <div className="flex-1">
                                              <div className="flex items-center justify-between">
                                                   <div className="font-semibold">{step.label}</div>
-                                                  <div className="text-sm font-medium text-gray-500">
+                                                  <div className="text-xs sm:text-sm font-medium text-gray-500">
                                                        {completed ? format(parseISO(found.timestamp), "PP p") : <span className="flex items-center gap-2"><FaClock /> Pending</span>}
                                                   </div>
                                              </div>
                                              
                                              {completed && (
-                                                  <div className="text-sm text-gray-600 mt-1">
+                                                  <div className="text-xs sm:text-sm text-gray-600 mt-1">
                                                        {formatDistanceToNow(parseISO(found.timestamp), { addSuffix: true })}
                                                   </div>
                                              )}

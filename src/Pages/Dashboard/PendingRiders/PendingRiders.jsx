@@ -2,12 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import Swal from "sweetalert2";
-// import useAxios from "../../../Context/Hooks/useAxios";
 import Loader from "../../../Components/Shared/Loader/Loader";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 
 const PendingRiders = () => {
-     // const axiosPublic = useAxios()
      const axiosSecure = useAxiosSecure()
      const [selectedRider, setSelectedRider] = useState(null);
      const { data: riders = [], isPending, refetch } = useQuery({

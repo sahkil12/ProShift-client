@@ -99,7 +99,7 @@ const Coverage = () => {
                                     icon={markIcon}
                                     position={[center.latitude, center.longitude]}
                                 >
-                                    {/* location popup in map */}
+                                    {/* location popup message in map */}
                                     <Popup>
                                         <div>
                                             <h3 className="font-bold text-lg">{center.district}</h3>
