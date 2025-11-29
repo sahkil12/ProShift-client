@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaBan } from "react-icons/fa";
 import Swal from "sweetalert2";
-import useAxios from "../../../Context/Hooks/useAxios";
 import Loader from "../../../Components/Shared/Loader/Loader";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import { FiSearch } from "react-icons/fi";
 
 const ActiveRiders = () => {
-     const axiosPublic = useAxios();
      const axiosSecure = useAxiosSecure()
 
      const [searchText, setSearchText] = useState("");
@@ -28,7 +26,6 @@ const ActiveRiders = () => {
           e.preventDefault();
           setFinalSearch(searchText);
      };
-
      const handleDeactivate = async (id) => {
           const result = await Swal.fire({
                title: "Deactivate Rider?",
@@ -70,7 +67,6 @@ const ActiveRiders = () => {
                               </button>
                          </div>
                     </form>
-
                </div>
                <div className="overflow-x-auto w-full py-5 md:p-4">
                     <table className="table table-zebra w-full border border-gray-300">

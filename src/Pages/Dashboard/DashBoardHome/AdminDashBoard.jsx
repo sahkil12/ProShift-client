@@ -114,7 +114,7 @@ const AdminDashBoard = () => {
                     <h3 className="text-2xl font-bold mb-4">Parcel Status Distribution</h3>
                     {/* pie chart apply */}
                     <div className="h-96 w-full">
-                         <ResponsiveContainer>
+                         <ResponsiveContainer width={'100%'} height={400}>
                               <PieChart>
                                    <Pie
                                         data={deliveryStatus}
@@ -140,7 +140,6 @@ const AdminDashBoard = () => {
                                    <Legend></Legend>
                               </PieChart>
                          </ResponsiveContainer>
-
                     </div>
                </div>
           </div>
