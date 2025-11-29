@@ -1,5 +1,6 @@
 import { FaTruck, FaBoxOpen, FaClock, FaCheckCircle, FaUsers, FaMotorcycle, FaUserShield, FaReceipt } from "react-icons/fa";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
+import { GrMoney } from "react-icons/gr";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../Components/Shared/Loader/Loader";
@@ -59,7 +60,12 @@ const AdminDashBoard = () => {
                     <StatCard
                          title="Total Revenue"
                          value={payments.totalRevenue.toFixed(2)}
-                         icon={<FaMoneyBillTrendUp className="text-green-500 text-4xl" />}
+                         icon={<FaMoneyBillTrendUp className="text-teal-600 text-4xl" />}
+                    />
+                    <StatCard
+                         title="Today Revenue"
+                         value={payments.todayRevenue.toFixed(2)}
+                         icon={<GrMoney className="text-green-600 text-4xl" />}
                     />
                     <StatCard
                          title="Total Users"
@@ -84,7 +90,7 @@ const AdminDashBoard = () => {
                          icon={<FaReceipt className="text-orange-500 text-4xl" />}
                     />
                </div>
-                         
+
                <h2 className="text-3xl font-bold mb-6 text-teal-900">Parcel Delivery Status</h2>
                <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-5">
                     {deliveryStatus.map((item) => (
