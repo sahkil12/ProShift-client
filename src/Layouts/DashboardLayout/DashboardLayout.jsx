@@ -39,7 +39,7 @@ const DashboardLayout = () => {
                     </div>
                     <div className="border mb-5 border-gray-400"></div>
                     <li>
-                        <NavLink to="/dashboard" >
+                        <NavLink end className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard" >
                             <span className={`flex items-center gap-4 text-gray-700 font-semibold`}>
                                 <FaHome /> Home
                             </span>
@@ -49,23 +49,23 @@ const DashboardLayout = () => {
                     {!isLoading && role === 'rider' &&
                         <>
                             <li>
-                                <NavLink to="/dashboard/pending-deliveries" >
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/pending-deliveries" >
                                     <span className={`flex items-center gap-4 text-gray-700 font-semibold`}>
                                         <FaTasks></FaTasks> Pending Deliveries
                                     </span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/complete-deliveries">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/complete-deliveries">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaCheckCircle /> Complete Deliveries
                                     </span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/my-earnings">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/my-earnings">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
-                                       <GiWallet></GiWallet> My Earnings 
+                                        <GiWallet></GiWallet> My Earnings
                                     </span>
                                 </NavLink>
                             </li>
@@ -75,14 +75,14 @@ const DashboardLayout = () => {
                     {!isLoading && role === 'admin' &&
                         <>
                             <li>
-                                <NavLink to="/dashboard/make-admin">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/make-admin">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaUserShield /> Manage Admins
                                     </span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/active-riders">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/active-riders">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaUserCheck /> Active Riders
                                     </span>
@@ -90,7 +90,7 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/pending-riders">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/pending-riders">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaUserClock /> Pending Riders
                                     </span>
@@ -98,7 +98,7 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/assign-rider">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/assign-rider">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaMotorcycle /> Assign Rider
                                     </span>
@@ -106,7 +106,7 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/cashout-requests">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/cashout-requests">
                                     <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                         <FaWallet /> Cashout Requests
                                     </span>
@@ -115,7 +115,7 @@ const DashboardLayout = () => {
                         </>
                     }
                     <li>
-                        <NavLink to="/dashboard/myParcels">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/myParcels">
                             <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                 <FaBox /> My Parcels
                             </span>
@@ -123,7 +123,7 @@ const DashboardLayout = () => {
                     </li>
 
                     <li>
-                        <NavLink to="/dashboard/payment-history">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/payment-history">
                             <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                 <FaMoneyBillWave /> Payment History
                             </span>
@@ -131,7 +131,7 @@ const DashboardLayout = () => {
                     </li>
 
                     <li>
-                        <NavLink to="/dashboard/track">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/track">
                             <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                 <FaSearchLocation /> Track a Package
                             </span>
@@ -139,7 +139,7 @@ const DashboardLayout = () => {
                     </li>
 
                     <li>
-                        <NavLink to="/dashboard/update-profile">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/update-profile">
                             <span className="flex items-center gap-4 text-gray-700 font-semibold">
                                 <FaUserEdit /> Update Profile
                             </span>
