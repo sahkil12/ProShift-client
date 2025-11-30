@@ -4,6 +4,7 @@ import useAuth from "../../Context/Hooks/useAuth";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 import useAxiosSecure from "../../Context/Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 const SendParcel = () => {
 
     const axiosSecure = useAxiosSecure()
@@ -129,6 +130,9 @@ const SendParcel = () => {
 
     return (
         <div className="max-w-full my-10 mx-auto p-7 md:p-14 bg-white  border border-gray-200 rounded-2xl">
+            <Helmet>
+                <title>ProShift | Send Parcel</title>
+            </Helmet>
             <h1 className="text-4xl md:text-5xl font-extrabold text-cyan-950 mb-8">Send Parcel</h1>
             <div className="border-b mb-8 text-gray-300 w-11/12"></div>
             <p className="mb-6 text-cyan-950 text-2xl font-bold">Enter your parcel details</p>

@@ -54,17 +54,23 @@ const Register = () => {
                         photoURL: profilePic
                     })
                         .then(res => {
-                            toast.success('You have successfully created an account at ProShift');
+                            if (res) {
+                                toast.success('You have successfully created an account at ProShift');
+                            }
                             navigate(from);
                         }).catch(error => {
-                            console.log(error);
+                            if (error) {
+                                //  console.log(error);
+                            }
                         })
                 }
             }
         }
         catch (error) {
-            console.log(error);
-            toast.error('Something went wrong!');
+            if (error) {
+                toast.error('Something went wrong!');
+            }
+
         }
     }
 

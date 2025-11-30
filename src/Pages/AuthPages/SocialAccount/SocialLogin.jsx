@@ -27,7 +27,11 @@ const SocialLogin = ({ methodName, from }) => {
                     }
                 }
             })
-            .catch(error => { console.log(error) })
+            .catch(error => {
+                if (error) {
+                    //  console.log(error);
+                }
+            })
     }
 
     return (

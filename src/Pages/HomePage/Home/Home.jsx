@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Banner from "./Banner/Banner";
 import Benefits from "./Benefits/Benefits";
 import Brands from "./Brands/Brands";
@@ -10,6 +11,9 @@ import OurServices from "./OurServices/OurServices";
 const Home = () => {
     return (
         <div className="pb-16 space-y-10 md:space-y-20">
+            <Helmet>
+                <title>ProShift | Home</title>
+            </Helmet>
             <Banner></Banner>
             <HowItWork></HowItWork>
             <OurServices></OurServices>

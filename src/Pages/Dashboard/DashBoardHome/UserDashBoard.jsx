@@ -43,7 +43,7 @@ const UserDashBoard = () => {
 
                     <div className="overflow-x-auto">
                          <table className="min-w-full border border-gray-200">
-                              <thead className="bg-gray-100">
+                              <thead className="bg-gray-200">
                                    <tr>
                                         <th className="p-3 text-left">Title</th>
                                         <th className="p-3 text-left">Status</th>

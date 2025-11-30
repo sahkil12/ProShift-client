@@ -22,7 +22,9 @@ const Login = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+               if(error){
+                 // console.log(error);
+               }
             })
     }
     return (

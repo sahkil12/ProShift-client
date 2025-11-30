@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
+import { Helmet } from "react-helmet";
 
 const MapController = ({ position }) => {
     const map = useMap()
@@ -45,6 +46,9 @@ const Coverage = () => {
 
     return (
         <div className="bg-white my-10 py-5 md:py-8 rounded-2xl border border-gray-200">
+            <Helmet>
+                <title>ProShift | Coverage</title>
+            </Helmet>
             <div className="max-w-11/12 mx-auto px-4 py-10">
                 <div className="mb-14">
                     {/* Title */}

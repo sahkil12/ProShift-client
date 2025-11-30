@@ -5,12 +5,16 @@ import { FaHome, FaBox, FaMoneyBillWave, FaSearchLocation, FaUserEdit, FaUserChe
 import { GiWallet } from "react-icons/gi";
 import useUserRole from "../../Context/Hooks/useUserRole";
 import { FaMotorcycle } from "react-icons/fa6";
+import { Helmet } from "react-helmet";
 
 const DashboardLayout = () => {
     const { role, isLoading } = useUserRole()
 
     return (
         <div className="drawer xl:drawer-open">
+            <Helmet>
+                <title>ProShift | Dashboard</title>
+            </Helmet>
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
             <div className="drawer-content flex flex-col">

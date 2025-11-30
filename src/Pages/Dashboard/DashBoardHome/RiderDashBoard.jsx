@@ -96,7 +96,7 @@ const RiderDashBoard = () => {
                     <h3 className="text-2xl font-bold mb-6">Last 5 Deliveries</h3>
                     <div className="overflow-x-auto">
                          <table className="min-w-full border border-gray-200">
-                              <thead className="bg-gray-100">
+                              <thead className="bg-gray-200">
                                    <tr>
                                         <th className="p-3 text-left">Parcel</th>
                                         <th className="p-3 text-left">Receiver</th>

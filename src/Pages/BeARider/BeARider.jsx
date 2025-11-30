@@ -4,6 +4,7 @@ import useAuth from "../../Context/Hooks/useAuth";
 import { useLoaderData } from "react-router";
 import useAxiosSecure from "../../Context/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const BeARider = () => {
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
@@ -57,6 +58,9 @@ const BeARider = () => {
   };
   return (
     <div className="bg-white my-10 py-5 md:py-8 rounded-2xl border border-gray-200">
+      <Helmet>
+        <title>ProShift | Be A Rider</title>
+      </Helmet>
       <div className="max-w-11/12 mx-auto px-4 py-10">
         <div className="mb-14">
           {/* Title */}
