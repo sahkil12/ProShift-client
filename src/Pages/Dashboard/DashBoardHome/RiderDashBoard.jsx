@@ -8,7 +8,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 const RiderDashBoard = () => {
      const axiosSecure = useAxiosSecure();
-
+     // rider stats details data api call 
      const { data: riderStats = [], isLoading, error } = useQuery({
           queryKey: ["rider-stats"],
           queryFn: async () => {
@@ -17,7 +17,7 @@ const RiderDashBoard = () => {
           },
           staleTime: 30_000
      });
-
+     // weekly parcel data api call 
      const { data: weeklyData = [], isLoading: loadingWeekly, error: weekError } = useQuery({
           queryKey: ["rider-weekly"],
           queryFn: async () => {
@@ -26,6 +26,7 @@ const RiderDashBoard = () => {
           },
           staleTime: 30_000
      });
+     // last delivery data api call
      const { data: lastDeliveries = [], isLoading: loadingLast } = useQuery({
           queryKey: ["rider-recent-deliveries"],
           queryFn: async () => {
@@ -92,7 +93,7 @@ const RiderDashBoard = () => {
                </div>
                {/* Recent rider Deliveries  */}
                <div className="mt-10 bg-white p-5 rounded-lg shadow-md border border-neutral-300">
-                    <h3 className="text-2xl font-bold mb-4">Last 5 Deliveries</h3>
+                    <h3 className="text-2xl font-bold mb-6">Last 5 Deliveries</h3>
                     <div className="overflow-x-auto">
                          <table className="min-w-full border border-gray-200">
                               <thead className="bg-gray-100">
