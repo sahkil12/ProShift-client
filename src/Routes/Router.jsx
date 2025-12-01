@@ -96,6 +96,10 @@ export const router = createBrowserRouter([
                 element: <DashBoardHome></DashBoardHome>
             },
             {
+                path: "dashboard/*",
+                element: <ErrorPage></ErrorPage>
+            },
+            {
                 path: 'make-admin',
                 element: <AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>
             },

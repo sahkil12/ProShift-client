@@ -12,7 +12,6 @@ const AuthLayout = () => {
         navigate('/')
         return <Loader></Loader>
     }
-
     return (
         <div className="">
             <div>

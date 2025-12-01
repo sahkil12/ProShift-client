@@ -35,14 +35,14 @@ const DashboardLayout = () => {
 
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-blue-100 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden space-y-3">
+                <ul className="menu bg-emerald-100 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden space-y-3">
                     {/* Sidebar content here */}
                     <div className="mb-7">
                         <ProShiftLogo></ProShiftLogo>
                     </div>
                     <div className="border mb-5 border-gray-400"></div>
                     <li>
-                        <NavLink end className={({ isActive }) => isActive ? 'bg-blue-200 ' : ''} to="/dashboard" >
+                        <NavLink end className={({ isActive }) => isActive ? 'bg-emerald-300 ' : ''} to="/dashboard" >
                             <span className={`flex items-center gap-4 text-gray-800 font-semibold`}>
                                 <FaHome /> Home
                             </span>
@@ -52,21 +52,21 @@ const DashboardLayout = () => {
                     {!isLoading && role === 'rider' &&
                         <>
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/pending-deliveries" >
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/pending-deliveries" >
                                     <span className={`flex items-center gap-4 text-gray-800 font-semibold`}>
                                         <FaTasks></FaTasks> Pending Deliveries
                                     </span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/complete-deliveries">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/complete-deliveries">
                                     <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                         <FaCheckCircle /> Complete Deliveries
                                     </span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/my-earnings">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/my-earnings">
                                     <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                         <GiWallet></GiWallet> My Earnings
                                     </span>
@@ -78,14 +78,14 @@ const DashboardLayout = () => {
                     {!isLoading && role === 'admin' &&
                         <>
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/make-admin">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/make-admin">
                                     <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                         <FaUserShield /> Manage Admins
                                     </span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/active-riders">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/active-riders">
                                     <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                         <FaUserCheck /> Active Riders
                                     </span>
@@ -93,7 +93,7 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/pending-riders">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/pending-riders">
                                     <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                         <FaUserClock /> Pending Riders
                                     </span>
@@ -101,7 +101,7 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/assign-rider">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/assign-rider">
                                     <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                         <FaMotorcycle /> Assign Rider
                                     </span>
@@ -109,7 +109,7 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/cashout-requests">
+                                <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/cashout-requests">
                                     <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                         <FaWallet /> Cashout Requests
                                     </span>
@@ -118,7 +118,7 @@ const DashboardLayout = () => {
                         </>
                     }
                     <li>
-                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/myParcels">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/myParcels">
                             <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                 <FaBox /> My Parcels
                             </span>
@@ -126,7 +126,7 @@ const DashboardLayout = () => {
                     </li>
 
                     <li>
-                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/payment-history">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/payment-history">
                             <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                 <FaMoneyBillWave /> Payment History
                             </span>
@@ -134,7 +134,7 @@ const DashboardLayout = () => {
                     </li>
 
                     <li>
-                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/track">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/track">
                             <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                 <FaSearchLocation /> Track a Package
                             </span>
@@ -142,7 +142,7 @@ const DashboardLayout = () => {
                     </li>
                     {/* add letter */}
                     <li>
-                        <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/update-profile">
+                        <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/update-profile">
                             <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                 <FaUserEdit /> Update Profile
                             </span>
