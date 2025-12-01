@@ -28,6 +28,8 @@ import CashoutRequests from "../Pages/Dashboard/Cashout Requests/CashoutRequests
 import MyEarnings from "../Pages/Dashboard/MyEarnings/MyEarnings";
 import TrackingParcel from "../Pages/Dashboard/TrackingParcel/TrackingParcel";
 import DashBoardHome from "../Pages/Dashboard/DashBoardHome/DashBoardHome";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import ErrorPage from "../Components/Shared/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
@@ -57,8 +59,16 @@ export const router = createBrowserRouter([
                 hydrateFallbackElement: <Loader></Loader>
             },
             {
+                path:'about',
+                element: <AboutUs></AboutUs>
+            },
+            {
                 path: 'forbiddenPage',
                 element: <ForbiddenPage></ForbiddenPage>
+            },
+            {
+                path:'/*',
+                element: <ErrorPage></ErrorPage>
             }
         ]
     },

@@ -1,15 +1,15 @@
 import { FaFacebookF } from "react-icons/fa6";
 import { RiLinkedinFill, RiTwitterXLine } from "react-icons/ri";
 import { FaYoutube } from "react-icons/fa";
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router";
 import ProShiftLogo from "../ProShiftLogo/ProShiftLogo";
 
 const Footer = () => {
     const navItems = <>
-        <li><NavLink> Services</NavLink></li>
         <li><NavLink to={'/coverage'}> Coverage </NavLink></li>
-        <li><NavLink> About Us </NavLink></li>
-        <li><NavLink> Be a Rider </NavLink></li>
+        <li><NavLink to={'about'}> About Us </NavLink></li>
+        <li><NavLink to={'/sendParcel'}> Send Parcel </NavLink></li>
+        <li><NavLink to={'/be_a_rider'}> Be a Rider </NavLink></li>
     </>
     return (
         <footer className="footer rounded-t-4xl footer-horizontal footer-center bg-neutral text-primary-content p-12">

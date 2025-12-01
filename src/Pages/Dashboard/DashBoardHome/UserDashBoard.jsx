@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import Loader from "../../../Components/Shared/Loader/Loader";
 import { FaBox, FaCheckCircle, FaClock, FaMoneyBill } from "react-icons/fa";
 import StatCard from './StatCard';
+import { Link } from 'react-router';
 
 const UserDashBoard = () => {
      const axiosSecure = useAxiosSecure();
@@ -62,6 +63,15 @@ const UserDashBoard = () => {
                                              </tr>
                                         );
                                    })}
+                                   {lastFiveParcels.length === 0 && (
+                                   <tr className=''>
+                                        <td colSpan="8" className="text-center py-10 text-gray-500 text-2xl ">
+                                             You don't send any parcel yet.
+                                            <Link to={"/sendParcel"} className='underline px-2 text-lg font-semibold hover:text-gray-700'> Click To Send Parcel</Link>
+                                        </td>
+                                        
+                                   </tr>
+                              )}
                               </tbody>
                          </table>
                     </div>

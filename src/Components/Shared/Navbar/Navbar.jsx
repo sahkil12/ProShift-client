@@ -11,15 +11,14 @@ const Navbar = () => {
     const navigate = useNavigate()
     const activeClasses = 'py-3 px-5 text-gray-700 transition duration-500 rounded-full font-bold bg-primary'
     const navItems = <>
-        <li><NavLink> Services</NavLink></li>
         <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'/coverage'}> Coverage </NavLink></li>
         <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'/sendParcel'}> Send Parcel </NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? `${activeClasses} ` : ''} to={'about'}> About Us </NavLink></li>
         {
             user && <>
                 <li><NavLink to={'/dashboard'}> Dashboard </NavLink></li>
             </>
         }
-        <li><NavLink> About Us </NavLink></li>
         {user ? <li><NavLink className={({ isActive }) => `${isActive ? `${activeClasses}` : ''} md:hidden flex`} to={'/be_a_rider'}> Be a Rider </NavLink></li>
             :
             <li><NavLink to={'/be_a_rider'}> Be a Rider </NavLink></li>}
@@ -79,7 +78,7 @@ const Navbar = () => {
                         </div>
                     }
                     {
-                        user? <details className="dropdown dropdown-end">
+                        user ? <details className="dropdown dropdown-end">
                             <summary className="border-2 p-0.5 rounded-full border-gray-400 cursor-pointer list-none hover:scale-105">
                                 <img src={user?.photoURL} className="w-9 h-9 md:w-10 md:h-10 rounded-full object-cover" alt="" />
                             </summary>

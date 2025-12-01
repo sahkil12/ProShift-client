@@ -3,7 +3,7 @@ import useAuth from "../../../Context/Hooks/useAuth";
 import useAxiosSecure from "../../../Context/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import Loader from "../../../Components/Shared/Loader/Loader";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const MyParcels = () => {
     const { user } = useAuth()
@@ -131,6 +131,7 @@ const MyParcels = () => {
                                 <tr>
                                     <td colSpan="8" className="text-center py-10 text-gray-500 text-2xl">
                                         You Don't Added Any Parcel Yet
+                                         <Link to={"/sendParcel"} className='underline px-2 text-lg font-semibold hover:text-gray-700'> Click To Send Parcel</Link>
                                     </td>
                                 </tr>
                             )

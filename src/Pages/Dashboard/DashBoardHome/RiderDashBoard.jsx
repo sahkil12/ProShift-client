@@ -121,6 +121,13 @@ const RiderDashBoard = () => {
                                              </tr>
                                         );
                                    })}
+                                   {lastDeliveries.length === 0 && (
+                                        <tr className=''>
+                                             <td colSpan="8" className="text-center py-10 text-gray-500 text-2xl ">
+                                                  You don't Delivered any parcel yet.
+                                             </td>
+                                        </tr>
+                                   )}
                               </tbody>
                          </table>
                     </div>

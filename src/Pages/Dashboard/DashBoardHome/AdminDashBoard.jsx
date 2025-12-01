@@ -108,9 +108,13 @@ const AdminDashBoard = () => {
                               </div>
                          </div>
                     ))}
+                    {
+                         deliveryStatus.length === 0 && <p className="font-semibold text-gray-600 text-xl">No Parcels Send Right Now Any Users!</p>
+                    }
                </div>
                {/* pie chart */}
-               <div className="mt-10 bg-white p-5 rounded-lg shadow-md border border-neutral-300">
+               {
+                    deliveryStatus.length === 0 ? <div></div> : <div className="mt-10 bg-white p-5 rounded-lg shadow-md border border-neutral-300">
                     <h3 className="text-2xl font-bold mb-4">Parcel Status Distribution</h3>
                     {/* pie chart apply */}
                     <div className="h-96 w-full">
@@ -142,6 +146,8 @@ const AdminDashBoard = () => {
                          </ResponsiveContainer>
                     </div>
                </div>
+               }
+               
           </div>
      );
 };

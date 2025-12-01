@@ -9,7 +9,6 @@ import { Helmet } from "react-helmet";
 
 const DashboardLayout = () => {
     const { role, isLoading } = useUserRole()
-
     return (
         <div className="drawer xl:drawer-open">
             <Helmet>
@@ -141,7 +140,7 @@ const DashboardLayout = () => {
                             </span>
                         </NavLink>
                     </li>
-
+                    {/* add letter */}
                     <li>
                         <NavLink className={({ isActive }) => isActive ? 'bg-blue-200' : ''} to="/dashboard/update-profile">
                             <span className="flex items-center gap-4 text-gray-800 font-semibold">

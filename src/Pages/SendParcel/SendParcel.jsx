@@ -129,11 +129,11 @@ const SendParcel = () => {
     };
 
     return (
-        <div className="max-w-full my-10 mx-auto p-7 md:p-14 bg-white  border border-gray-200 rounded-2xl">
+        <div className="max-w-full my-10 mx-auto p-7 md:p-14 bg-white border border-gray-200 rounded-2xl">
             <Helmet>
                 <title>ProShift | Send Parcel</title>
             </Helmet>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-cyan-950 mb-8">Send Parcel</h1>
+            <h1 className="text-4xl md:text-[56px] font-extrabold text-cyan-950 mb-8">Send Parcel</h1>
             <div className="border-b mb-8 text-gray-300 w-11/12"></div>
             <p className="mb-6 text-cyan-950 text-2xl font-bold">Enter your parcel details</p>
             {/*   parcel details form */}
