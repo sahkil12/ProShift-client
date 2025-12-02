@@ -11,7 +11,7 @@ ProShift is a full parcel delivery and rider-management platform that provides d
 - if user not login user did not see protected page
 - if user not login and try to see protected page Protected page redirect to user in login page
 
-## JsonWeb Token
+### JsonWeb Token
 - jwt token system use for protected Api call
 - secure api and safe user data for leak and hacker attack
 - handle jwt token error and redirect to forbidden page 
@@ -43,7 +43,7 @@ ProShift is a full parcel delivery and rider-management platform that provides d
 There are **three roles**: User  |  Rider  |  Admin  
 Each role has its own dashboard and permissions.
 
-## 👤 User Dashboard
+##  User Dashboard
 Users can:
 - View all parcel details.
 - See total cost.
@@ -51,7 +51,7 @@ Users can:
 - Track parcel with tracking ID.
 
 
-## 🏍 Rider Dashboard
+##  Rider Dashboard
 Riders can:
 - View total deliveries.
 - View total earnings, today's earnings.
@@ -62,7 +62,7 @@ Riders can:
 - Request to admin earning money cashout .
 
 
-## 👨‍✈️ Admin Dashboard
+##  Admin Dashboard
 Admins can:
 - Manage all users, riders, and parcels.
 - Approve/reject rider applications.
@@ -73,7 +73,7 @@ Admins can:
 - View parcel status in pie chart.
 
 
-## 🧩 Tech Stack
+##  Tech Stack
 
 ### Frontend
 - React 19  
@@ -119,8 +119,8 @@ Admins can:
 ## 🛠 How to Run Locally
 
 ### Client
-npm install
-npm run dev
+- npm install
+- npm run dev
 
 ## Project Summary
 
