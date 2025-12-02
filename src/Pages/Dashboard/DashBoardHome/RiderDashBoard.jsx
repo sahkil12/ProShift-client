@@ -78,7 +78,7 @@ const RiderDashBoard = () => {
                </div>
                {/* Weekly Delivery Chart */}
                <div className="mt-10 bg-white p-2 md:p-5 rounded-lg shadow-md border border-neutral-300">
-                    <h3 className="text-2xl font-bold mb-4">Deliveries This Week</h3>
+                    <h3 className="text-2xl font-bold m-4">Deliveries This Week</h3>
                     <div className="h-96 w-full md:w-11/12 mt-10 ">
                          <ResponsiveContainer width="100%" height={350} >
                               <LineChart data={weeklyData}>

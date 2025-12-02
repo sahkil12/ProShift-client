@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react';
-import deliveryManImg from '../../../../public/Delivery man.json'
+import deliveryManImg from "./../../../../public/Delivery-man.json"
 import { Link } from 'react-router';
 
 const ErrorPage = () => {

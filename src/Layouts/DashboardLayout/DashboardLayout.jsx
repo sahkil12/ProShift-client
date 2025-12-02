@@ -18,14 +18,13 @@ const DashboardLayout = () => {
 
             <div className="drawer-content flex flex-col">
                 {/* Navbar */}
-                <div className="navbar bg-gray-300 w-full xl:hidden">
+                <div className="navbar bg-emerald-100 mb-5 py-5 w-full xl:hidden">
                     <div className="flex-none ">
                         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
-                            <RiMenuUnfold2Fill size={22}></RiMenuUnfold2Fill>
+                            <RiMenuUnfold2Fill size={26}></RiMenuUnfold2Fill>
                         </label>
                     </div>
-                    <div className="mx-2 flex-1 px-2">Dashboard</div>
-
+                    <div className="mx-2 flex-1 px-2 text-xl sm:text-2xl font-semibold">Dashboard</div>
                 </div>
                 {/* Page content here */}
                 <div className="min-h-screen">
