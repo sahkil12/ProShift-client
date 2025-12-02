@@ -41,11 +41,11 @@ const FAQS = () => {
     return (
         <div className="py-6 md:w-11/12 mx-auto">
             <div className="space-y-5 text-center mb-8">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-teal-900 ">Frequently Asked Question (FAQ)</h2>
-                <p className="font-medium opacity-90 px-2 text-gray-600 sm:w-4/6 lg:w-3/6 mx-auto">Enhance posture, mobility, and well-being effortlessly with Posture Pro. Achieve proper alignment, reduce pain, and strengthen your body with ease!</p>
+                <h2 className="text-[26px] md:text-4xl font-extrabold text-teal-900 ">Frequently Asked Question (FAQ)</h2>
+                <p className="font-medium opacity-90 px-3 text-gray-600 sm:w-4/6 lg:w-3/6 mx-auto">Enhance posture, mobility, and well-being effortlessly with Posture Pro. Achieve proper alignment, reduce pain, and strengthen your body with ease!</p>
             </div>
             {/* faq collapse*/}
-            <div className="lg:w-10/12 mx-auto p-6">
+            <div className="lg:w-10/12 mx-auto p-2 md:p-6">
                 {
                     faqsData.slice(0, initialNumber).map((faq, index) => <div key={index} className="collapse collapse-arrow bg-white border border-gray-200 my-2">
                         <input type="radio" name="faq-accordion" className="peer" defaultChecked={index === 0} />
@@ -58,12 +58,12 @@ const FAQS = () => {
             {
                 initialNumber <= 5 ?
                     <div onClick={() => { setInitialNumber(faqsData.length) }} className="w-fit mx-auto mt-6 flex items-center">
-                        <button className="py-3 px-7 font-bold text-lg rounded-xl bg-primary">See More FAQ's</button>
+                        <button className="py-3 px-7 font-bold text-base md:text-lg rounded-xl bg-primary">See More FAQ's</button>
                         <span className="p-2 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
                     </div>
                     :
                     <div onClick={() => { setInitialNumber(5) }} className="w-fit mx-auto mt-6 flex items-center">
-                        <button className="py-3 px-7 font-bold text-lg rounded-xl bg-[#CAEB66]">See Less FAQ's</button>
+                        <button className="py-3 px-7 font-bold text-base md:text-lg  rounded-xl bg-[#CAEB66]">See Less FAQ's</button>
                         <span className="p-2 text-3xl rounded-full bg-black/90 text-[#CAEB66]"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
                     </div>
             }

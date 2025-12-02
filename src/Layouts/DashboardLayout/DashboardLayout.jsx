@@ -34,7 +34,7 @@ const DashboardLayout = () => {
 
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-accent/10 border-r-4 border-neutral-100 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden space-y-3">
+                <ul className="menu bg-[#ddfcf7] z-1 border-r-2 border-neutral-200 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden space-y-3">
                     {/* Sidebar content here */}
                     <div className="mb-7">
                         <ProShiftLogo></ProShiftLogo>

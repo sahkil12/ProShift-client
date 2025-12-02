@@ -49,7 +49,7 @@ const Coverage = () => {
             <Helmet>
                 <title>ProShift | Coverage</title>
             </Helmet>
-            <div className="max-w-11/12 mx-auto px-2 md:px-4 py-10">
+            <div className="max-w-11/12 mx-auto md:px-4 py-10">
                 <div className="mb-14">
                     {/* Title */}
                     <h1 className="text-4xl md:text-[52px] text-cyan-950 font-extrabold mb-10">

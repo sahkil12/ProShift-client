@@ -21,7 +21,7 @@ const CustomerReviews = () => {
         <section className="py-10">
             {/* Heading */}
             <div className="text-center mb-14">
-                <img src={headingImg} alt="Reviews" className="mx-auto mb-8 w-56" />
+                <img src={headingImg} alt="Reviews" className="mx-auto mb-12 w-56" />
                 <h2 className="text-3xl md:text-4xl font-extrabold text-teal-900">
                     What our customers are saying
                 </h2>
