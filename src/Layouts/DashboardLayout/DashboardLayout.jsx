@@ -18,7 +18,7 @@ const DashboardLayout = () => {
 
             <div className="drawer-content flex flex-col">
                 {/* Navbar */}
-                <div className="navbar bg-emerald-100 mb-5 py-5 w-full xl:hidden">
+                <div className="navbar bg-gray-200 mb-5 py-4 w-full xl:hidden">
                     <div className="flex-none ">
                         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <RiMenuUnfold2Fill size={26}></RiMenuUnfold2Fill>
@@ -31,10 +31,9 @@ const DashboardLayout = () => {
                     <Outlet></Outlet>
                 </div>
             </div>
-
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-[#ddfcf7] z-1 border-r-2 border-neutral-200 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden space-y-3">
+                <ul className="menu bg-[#d0ece9] z-1 border-r-2 border-neutral-200 text-black font-medium text-lg min-h-full w-80 p-4 overflow-y-hidden space-y-3">
                     {/* Sidebar content here */}
                     <div className="mb-7">
                         <ProShiftLogo></ProShiftLogo>

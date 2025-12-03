@@ -7,6 +7,7 @@ import { TbUserUp } from "react-icons/tb";
 import { useState } from "react";
 import axios from "axios";
 import useAxios from "../../../Context/Hooks/useAxios";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Register = () => {
     const { createUser, updateUserProfile } = useAuth()
@@ -16,6 +17,7 @@ const Register = () => {
     const [preview, setPreview] = useState(null);
     const axiosPublic = useAxios()
     const location = useLocation()
+    const [showPassword, setShowPassword] = useState(false);
     const from = location.state?.from || "/";
 
     const handlePhotoChange = async (e) => {
@@ -124,9 +126,21 @@ const Register = () => {
                     {/* password */}
                     <div className="space-y-1 text-base">
                         <label className="font-semibold block text-gray-800">Password</label>
-                        <input
-                            {...register("password", { required: true, minLength: 8 })}
-                            type="password" placeholder="Your Password" className="w-full px-4 py-2.5 md:py-3.5 text-base md:text-lg font-semibold rounded-md border-2 border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:border-gray-500" />
+                        <div className="relative">
+                            <input
+                                {...register("password", { required: true, minLength: 8 })}
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Your Password"
+                                className="w-full px-4 py-2.5 md:py-3.5 text-base md:text-lg font-semibold rounded-md border-2 border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:border-gray-500"
+                            />
+                            {/*  hide/show icon button */}
+                            <span
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-xl text-gray-600"
+                            >
+                                {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                            </span>
+                        </div>
                         {/* error handle */}
                         {errors.password?.type === 'required' && <p className="text-red-500 font-medium ">Password is required !</p>}
                         {errors.password?.type === 'minLength' && <p className="text-red-500 font-medium ">Password Must be 8 character or longer</p>}

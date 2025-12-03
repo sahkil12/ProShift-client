@@ -96,7 +96,7 @@ const Navbar = () => {
                             </ul>
                         </details> :
                             <div className="flex items-center">
-                                <Link className="border-2 mx-3 px-7 text-lg rounded-xl font-semibold text-gray-700 py-2 border-gray-300 hover:border-gray-400 transition duration-200 hover:-translate-y-0.5" to={'/login'}>Login</Link>
+                                <Link className="border-2 mx-3 px-7 text-base md:text-lg rounded-xl font-semibold text-gray-700 py-2 border-gray-300 hover:border-gray-400 transition duration-200 hover:-translate-y-0.5" to={'/login'}>Login</Link>
                                 {/* register */}
                                 <Link to={'/register'} className="hidden md:flex w-fit mx-auto items-center transition duration-200 hover:-translate-y-0.5 ">
                                     <button className="cursor-pointer py-2.5 px-7 font-bold text-lg rounded-xl bg-primary">Register</button>
