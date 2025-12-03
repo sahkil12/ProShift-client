@@ -3,12 +3,15 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Context/Hooks/useAuth";
 import SocialLogin from "../SocialAccount/SocialLogin";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
     const { loginUser } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const navigate = useNavigate()
     const location = useLocation()
+    const [showPassword, setShowPassword] = useState(false);
     const from = location.state?.from || "/";
     const onSubmit = (data) => {
         const email = data.email;
@@ -22,9 +25,9 @@ const Login = () => {
                 }
             })
             .catch(error => {
-               if(error){
-                 // console.log(error);
-               }
+                if (error) {
+                    toast.error(error.message, { duration: 2000 });
+                }
             })
     }
     return (
@@ -44,14 +47,26 @@ const Login = () => {
                         <input
                             {...register("email", { required: true })}
                             type="email" placeholder="Your Email"
-                            className="w-full px-4 py-3.5 text-lg font-semibold rounded-md border-2 border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:border-gray-500" />
+                            className="w-full px-4 py-2.5 md:py-3.5 text-base md:text-lg font-semibold rounded-md border-2 border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:border-gray-500" />
                     </div>
                     {/* password */}
                     <div className="space-y-1 text-base">
                         <label className="font-semibold block text-gray-800">Password</label>
-                        <input
-                            {...register("password", { required: true, minLength: 8 })}
-                            type="password" placeholder="Your Password" className="w-full px-3.5 py-4 text-lg font-semibold rounded-md border-2 border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:border-gray-500" />
+                        <div className="relative">
+                            <input
+                                {...register("password", { required: true, minLength: 8 })}
+                                type={showPassword ? "text" : "password"}  
+                                placeholder="Your Password"
+                                className="w-full px-4 py-2.5 md:py-3.5 text-base md:text-lg font-semibold rounded-md border-2 border-gray-300 bg-gray-50 text-gray-800 focus:outline-none focus:border-gray-500"
+                            />
+                            {/*  hide/show icon button */}
+                            <span
+                                onClick={() => setShowPassword(!showPassword)}  
+                                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-xl text-gray-600"
+                            >
+                                {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                            </span>
+                        </div>
                         {/* error handle */}
                         {errors.password?.type === 'required' && <p className="text-red-500 font-medium ">Password is required!</p>}
                         {errors.password?.type === 'minLength' && <p className="text-red-500 font-medium ">Password Must be 8 character or longer</p>}
@@ -60,7 +75,7 @@ const Login = () => {
                             <a rel="noopener noreferrer" href="#">Forgot Password?</a>
                         </div>
                     </div>
-                    <button className="block text-lg w-full p-3 text-center rounded-md text-black font-bold bg-primary">Login</button>
+                    <button className="block text-lg w-full p-2 md:p-3 text-center rounded-md text-black font-bold bg-primary">Login</button>
                 </form>
                 <span className="font-medium text-lg text-gray-500">Don't have an account? <Link state={{ from }} to={'/register'}><b className="text-emerald-800 hover:underline">Register</b></Link> </span>
                 <div className="flex items-center pt-4 space-x-1">

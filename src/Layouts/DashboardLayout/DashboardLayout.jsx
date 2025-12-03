@@ -140,13 +140,13 @@ const DashboardLayout = () => {
                         </NavLink>
                     </li>
                     {/* add letter */}
-                    <li>
+                    {/* <li>
                         <NavLink className={({ isActive }) => isActive ? 'bg-emerald-300' : ''} to="/dashboard/update-profile">
                             <span className="flex items-center gap-4 text-gray-800 font-semibold">
                                 <FaUserEdit /> Update Profile
                             </span>
                         </NavLink>
-                    </li>
+                    </li> */}
 
                 </ul>
             </div>

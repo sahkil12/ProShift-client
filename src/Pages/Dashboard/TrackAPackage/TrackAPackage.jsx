@@ -50,10 +50,10 @@ const TrackAPackage = () => {
                                         <td className="font-semibold ">
                                              {parcel.delivery_status}
                                         </td>
-                                        <td className="flex gap-2">
+                                        <td className="">
                                              <button
                                                   onClick={() => handleTrackingPackage(parcel)}
-                                                  className="btn btn-primary text-black/80 font-bold"
+                                                  className="btn text-xs md:text-base btn-primary text-black/80 font-bold"
                                              >
                                                   Track Parcel
                                              </button>

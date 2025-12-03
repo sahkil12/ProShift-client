@@ -9,7 +9,7 @@ import {
 
 const servicesData = [
     {
-        icon: <FaShippingFast className="text-4xl  text-gray-700" />,
+        icon: <FaShippingFast className="text-4xl text-gray-700" />,
         title: "Express & Standard Delivery",
         description: "We deliver parcels within 24–72 hours in Dhaka, Chittagong, Sylhet, Khulna, and Rajshahi. Express delivery available in Dhaka within 4–6 hours from pick-up to drop-off."
     },
@@ -42,8 +42,8 @@ const servicesData = [
 
 const OurServices = () => {
     return (
-        <section className="py-16 md:py-28 bg-[#03373D] rounded-4xl">
-            <div className="w-full md:w-11/12 mx-auto px-5 text-center">
+        <section className="py-10 md:py-28 bg-[#03373D] rounded-3xl md:rounded-4xl">
+            <div className="w-full md:w-11/12 mx-auto px-4 text-center">
                 <h2 className="text-4xl font-extrabold text-white mb-6">Our Services</h2>
                 <p className="text-gray-400 text-base/relaxed font-medium w-11/12 md:w-4/6 mx-auto ">
                     Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.
