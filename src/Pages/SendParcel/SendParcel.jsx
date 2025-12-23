@@ -363,7 +363,7 @@ const SendParcel = () => {
                     </div>
                 </div>
                 {/* more details added soon */}
-                <button type="submit" className="btn btn-primary w-fit px-12 py-5 text-base m-2 text-black">
+                <button type="submit" className="btn btn-primary text-sm w-fit px-12 py-5 md:text-base m-2 text-black">
                     Proceed to Confirm Booking
                 </button>
             </form>
