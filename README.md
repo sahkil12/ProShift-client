@@ -105,7 +105,7 @@ Admins can:
 - vercel (for deploy)
 - Node.js  
 - Express.js  
-- MongoDB  ( database )
+- MongoDB Atlas ( database )
 - Firebase Admin  
 - Stripe  (payment system)
 - CORS  
