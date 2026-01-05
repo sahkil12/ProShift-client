@@ -81,7 +81,7 @@ const Navbar = () => {
                     }
                     {
                         user ? <details className="dropdown dropdown-end">
-                            <summary className="border-2 p-0.5 rounded-full border-gray-400 cursor-pointer list-none hover:scale-105">
+                            <summary className="transition-all duration-300 border-2 p-0.5 rounded-full border-gray-500/90 cursor-pointer list-none hover:scale-105">
                                 <img src={user?.photoURL} className="w-9 h-9 md:w-12 md:h-12 rounded-full object-cover" alt="" />
                             </summary>
 
