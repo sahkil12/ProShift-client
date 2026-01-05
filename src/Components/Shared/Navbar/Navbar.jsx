@@ -5,9 +5,11 @@ import useAuth from "../../../Context/Hooks/useAuth";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import gsap from "gsap";
+import useUserRole from "../../../Context/Hooks/useUserRole";
 
 const Navbar = () => {
     const { user, logOutUser } = useAuth()
+    const { role, isLoading } = useUserRole()
     const navigate = useNavigate()
     const activeClasses = 'py-3 px-5 text-gray-700 transition duration-500 rounded-full font-bold bg-primary'
     const navItems = <>
@@ -72,7 +74,7 @@ const Navbar = () => {
                 <div className="flex items-center gap-4">
                     {/* bea a rider button */}
                     {
-                        user && <div onClick={() => { navigate('/be_a_rider') }} className="hidden cursor-pointer md:flex w-fit mx-auto items-center">
+                     !isLoading && user && role === 'user' && <div onClick={() => { navigate('/be_a_rider') }} className="hidden cursor-pointer md:flex w-fit mx-auto items-center">
                             <button className="py-2.5 px-7 font-bold text-lg rounded-xl cursor-pointer bg-primary">Be a rider</button>
                             <span className="p-1.5 text-3xl rounded-full bg-black/90 text-primary"><IoArrowForward className="-rotate-35"></IoArrowForward></span>
                         </div>
@@ -80,7 +82,7 @@ const Navbar = () => {
                     {
                         user ? <details className="dropdown dropdown-end">
                             <summary className="border-2 p-0.5 rounded-full border-gray-400 cursor-pointer list-none hover:scale-105">
-                                <img src={user?.photoURL} className="w-9 h-9 md:w-10 md:h-10 rounded-full object-cover" alt="" />
+                                <img src={user?.photoURL} className="w-9 h-9 md:w-12 md:h-12 rounded-full object-cover" alt="" />
                             </summary>
 
                             <ul className="dropdown-content menu bg-blue-50 rounded-box z-50 w-64 md:w-72 p-5 h-72 shadow-md border-2 border-gray-300 flex justify-start items-center flex-col gap-5 mt-2">
