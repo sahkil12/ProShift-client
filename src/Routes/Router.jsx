@@ -84,7 +84,6 @@ export const router = createBrowserRouter([
                 path: '/register',
                 element: <Register></Register>
             },
-
         ]
     },
     {
@@ -98,7 +97,7 @@ export const router = createBrowserRouter([
             {
                 path: "dashboard/*",
                 element: <ErrorPage></ErrorPage>
-            },
+            },  
             {
                 path: 'make-admin',
                 element: <AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>
