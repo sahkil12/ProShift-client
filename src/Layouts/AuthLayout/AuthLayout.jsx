@@ -17,7 +17,7 @@ const AuthLayout = () => {
             <div>
                 <div className="hero">
                     <div className=" flex justify-center items-center w-full flex-col-reverse lg:flex-row-reverse">
-                        <div className="bg-[#FAFDF0] w-full flex-1 h-screen flex justify-center items-center">
+                        <div className="bg-[#FAFDF0] w-full flex-1 h-screen hidden lg:flex justify-center items-center">
                             <motion.img
                                 animate={{ y: [25, 80, 25] }}
                                 transition={{ duration: 6, repeat: Infinity }}
@@ -29,7 +29,6 @@ const AuthLayout = () => {
                             <div className="w-11/12 py-5 mx-auto">
                                 <ProShiftLogo></ProShiftLogo>
                             </div>
-
                             <Outlet></Outlet>
                         </div>
                     </div>
