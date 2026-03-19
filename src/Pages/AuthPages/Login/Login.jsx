@@ -32,7 +32,6 @@ const Login = () => {
                 }
             })
     }
-
     // test rider login
     const riderLogin = () => {
         const email = "proshiftrider@gmail.com"
